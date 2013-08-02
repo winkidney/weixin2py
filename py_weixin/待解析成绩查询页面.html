@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="http://211.67.32.144:80/edu/"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>课程成绩查询</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="author" content="" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+
+
+
+<!-- 加载公共js表 -->
+
+<!-- jquery 1.4.4 插件/ -->
+<script type="text/javascript" src="http://211.67.32.144:80/edu/tools/jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://211.67.32.144:80/edu/js/base/globalVar.js"></script>
+<script type="text/javascript" src="http://211.67.32.144:80/edu/js/base/plugin.js"></script>
+<script type="text/javascript" src="http://211.67.32.144:80/edu/js/base/commonfunction.js"></script>
+<!-- Jquery UI -->
+<script type="text/javascript" src="http://211.67.32.144:80/edu/tools/jqueryUI/jquery-ui-1.8.7.custom.min.js"></script>
+
+<!-- 加载公共css表 -->
+<link href="http://211.67.32.144:80/edu/css/public.css?time=2013-7-23" rel="stylesheet" type="text/css" />
+<!-- Jquery UI CSS -->
+<link href="http://211.67.32.144:80/edu/tools/jqueryUI/css/custom-theme/jquery-ui-1.8.10.custom.css" rel="stylesheet"
+	type="text/css" />
+<!-- 解决ie6下png不透明问题-->
+<!--[if lt IE 7]>
+        <script type="text/javascript" src="http://211.67.32.144:80/edu/tool/transparent/unitpngfix.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/grade/stuGradeManager.js?times=20130305"></script>
+</head>
+
+<body style="background-color:#FFFFFF">
+<!--整个右部分开始 -->
+<div id="right">
+<!--插入一行一列的表格 此表格用于放置标题 -->
+<table class="title tac f14px" cellpadding="0" cellspacing="0">
+  <tr >
+    <td>课程成绩查询</td>
+  </tr>
+</table>
+<!--一行一列的表格结束 -->
+
+<!--form开始 -->
+
+
+<form  method="post" action="gradeEnteringStudent!getAllGradeEnter.action">
+<!--插入一行三列的表格 此表格用于放置button和select -->
+    <table cellpadding="0" cellspacing="1" class="select tac">
+       <!--行开始 -->
+        <tr>
+        <!--第一列开始 -->
+          <td class="tal pl20px">学年</td>
+          <td class="tal pl20px"><select name="configData.openYear"> 
+                 <option  selected="selected">2013</option>
+                	
+                		
+		          		<option value="2003" >2003</option>
+		          		
+		          	
+                		
+		          		<option value="2004" >2004</option>
+		          		
+		          	
+                		
+		          		<option value="2005" >2005</option>
+		          		
+		          	
+                		
+		          		<option value="2006" >2006</option>
+		          		
+		          	
+                		
+		          		<option value="2007" >2007</option>
+		          		
+		          	
+                		
+		          		<option value="2008" >2008</option>
+		          		
+		          	
+                		
+		          		<option value="2009" >2009</option>
+		          		
+		          	
+                		
+		          		<option value="2010" >2010</option>
+		          		
+		          	
+                		
+		          		<option value="2011" >2011</option>
+		          		
+		          	
+                		
+		          		<option value="2012" >2012</option>
+		          		
+		          	
+                		
+		          	
+                		
+		          		<option value="2014" >2014</option>
+		          		
+		          	
+                		
+		          		<option value="2015" >2015</option>
+		          		
+		          	
+                		
+		          		<option value="2016" >2016</option>
+		          		
+		          	
+            </select> </td>
+       <!--第二列开始 -->
+      <td class="tal pl20px">学期 </td>
+      <td class="tal pl20px"> <select name="configData.openTerm">
+           		
+                	
+                	<option selected="selected" value="0">春季学期</option>
+                	
+                
+                	
+                
+                
+                	
+                
+                	
+                	<option value="1">秋季学期</option>
+                	
+                
+          </select></td>
+     <!--第三列开始 -->
+      <td> <input name="Submit" class="button" value="查 询"  type="submit"/></td>
+    </tr>
+    <!--行结束 -->
+ </table>
+ <!--一行三列的表格结束 -->
+</form>
+
+
+<!--form结束 -->
+<!--插入一个表格，放置成绩列表 -->
+<table  class="list_table tac" border="0" cellspacing="1" >
+  <tr>
+  	
+    <th>课程号</th>
+    <th>课程名称</th>
+    <th>总评</th>
+    <th>学分</th>
+    <th>考核方式</th>
+    <th>选课属性</th>
+    <th>备注</th>
+    <th>考试性质</th>
+  	<th>学年学期</th>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>gxk012210</td>
+    <td>信息检索</td>
+   
+	   	<td>0.0</td>  
+	   
+   
+   
+   <td>2.0</td>
+   <td>考查      </td>
+   <td>任选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>gxk0813002</td>
+    <td>日本动漫赏析</td>
+   
+	   	<td>67.9</td>  
+	   
+   
+   
+   <td>2.0</td>
+   <td>考查      </td>
+   <td>任选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>08010124</td>
+    <td>大学英语（4）</td>
+   
+	   	<td>73.9</td>  
+	   
+   
+   
+   <td>4.0</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>09010164</td>
+    <td>大学体育（4）</td>
+   
+	   	<td>86.0</td>  
+	   
+   
+   
+   <td>2.0</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>03420104</td>
+    <td>计算机三维建模</td>
+   
+	   	<td>85.7</td>  
+	   
+   
+   
+   <td>2.0</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>034200000</td>
+    <td>二维动画课程设计</td>
+   
+	   	<td>92.9</td>  
+	   
+   
+   
+   <td>1.0</td>
+   <td>考查      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>03420134</td>
+    <td>计算机网络</td>
+   
+	   	<td>79.0</td>  
+	   
+   
+   
+   <td>3.0</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>03420144</td>
+    <td>数字图像处理</td>
+   
+	   	<td>68.0</td>  
+	   
+   
+   
+   <td>3.0</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>03420154</td>
+    <td>虚拟现实技术</td>
+   
+	   	<td>94.0</td>  
+	   
+   
+   
+   <td>2.5</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>03420114</td>
+    <td>电视节目编导与制作</td>
+   
+	   	<td>82.4</td>  
+	   
+   
+   
+   <td>4.0</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+  <tr style="line-height: 22px;">
+    <td>03420124</td>
+    <td>操作系统</td>
+   
+	   	<td>90.0</td>  
+	   
+   
+   
+   <td>3.5</td>
+   <td>考试      </td>
+   <td>必选</td>
+   <td>正常</td>
+   <td>正常考试</td>
+   <td>2013春</td>
+  </tr>
+  
+   
+</table>
+
+<!--成绩列表表格结束 -->
+<table cellpadding="0" cellspacing="0" class="list_table_nohover list_table">
+	<tr align="center">
+		<td >
+          	<input  value="返       回"  type="button" onclick="window.history.go(-1);"/>
+      	</td>
+  	</tr>
+ </table>
+</div>
+<!--整个右部分结束 -->
+
+</body>
+</html>
