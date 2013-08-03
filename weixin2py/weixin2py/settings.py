@@ -1,3 +1,4 @@
+#coding:utf-8
 # Django settings for weixin2py project.
 import os
 if 'SERVER_SOFTWARE' in os.environ:
@@ -161,9 +162,29 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+                 #my logger settings
+        'default': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join('/home/','all.log'), #或者直接写路径
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            #'formatter':'standard',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            #'formatter': 'standard'
+        },
+                 #my logger ending
     },
     'loggers': {
+        'django': {
+            'handlers': ['default','console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',

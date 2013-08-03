@@ -51,6 +51,7 @@ def score_query(user_name,password,year='',term=''):
     return result_html
 
 def clean_text(src_html):
+    '''利用源获得的源网页数据生成一个字典对象，科目：成绩'''
     regexp = re.compile(r'<td>(.+?)</td>')
     result = re.findall(regexp,src_html)
     length = len(result)
@@ -63,14 +64,16 @@ def clean_text(src_html):
         if count*9+3 > length:
             break
     return clean_data
-def main():
-    user_name = '031140816'
-    passwd = '19921226'
-    text = score_query(user_name,passwd)
+
+def main(user_name,passwd,year='',term=''):
+    '''根据输入的学号密码返回一个字符串列表，每一行的内容为“科目：成绩”'''
+    text = score_query(user_name,passwd,year,term)
     clean_data = clean_text(text)
+    results = []
     for key in clean_data:
-        print key,clean_data[key]
-    
+        results.append(key+'：'+clean_data[key])
+    #print results
+    return results
 if __name__ == '__main__':
-    main()
+    main('031140816','19921226')
     
