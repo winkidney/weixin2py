@@ -1,8 +1,12 @@
 #coding:utf-8
+#views of weixin2py foleder
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 import hashlib
 from django.http import Http404
+from msg_classes import TextMsg,ImgMsg,PicTextMsg
+from tools.xml_reader import UserMsg
 #全局变量
 TOKEN = 'kidney'
 
@@ -36,7 +40,16 @@ def home(request):
             myresponse.write('Fail!')
             return myresponse
     if request.method == 'POST':
-        pass
-        
+        recived_msg = UserMsg(request.body)
+        msg = TextMsg()
+        #一些公用的消息处理
+        msg.from_user_name = recived_msg.to_user_name
+        msg.to_user_name = recived_msg.from_user_name
+        msg.create_time = str(int(recived_msg.create_time)+1)
+        if recived_msg.msg_type == 'text':
+            text_response(msg,"欢迎使用湖北民族学院小助手，功能开发测试中～～")
+            return render_to_response('response/text_to_user.xml',locals())
     
-    
+def text_response(msg,text):
+    msg.content = text
+    return

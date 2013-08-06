@@ -1,0 +1,15 @@
+ {% comment %}
+ 回复給用户的音乐消息
+ {% endcomment %}
+ <xml>
+ <ToUserName><![CDATA[{{ msg.to_user_name }}]]></ToUserName>
+ <FromUserName><![CDATA[{{ msg.from_user_name }}]]></FromUserName>
+ <CreateTime>{{ msg.create_time }}</CreateTime>
+ <MsgType><![CDATA[music]]></MsgType>
+ <Music>
+ <Title><![CDATA[{{ msg.title }}]]></Title>
+ <Description><![CDATA[{{ msg.description }}]]></Description>
+ <MusicUrl><![CDATA[{{ msg.music_url }}]]></MusicUrl>
+ <HQMusicUrl><![CDATA[{{ msg.hq_musci_url }}]]></HQMusicUrl>
+ </Music>
+ </xml>

@@ -1,0 +1,10 @@
+{% comment %}
+回复給用户的文字消息
+{% endcomment %}
+<xml>
+	<ToUserName><![CDATA[{{ msg.to_user_name }}]]></ToUserName>
+	<FromUserName><![CDATA[{{ msg.from_user_name }}]]></FromUserName>
+	<CreateTime>{{ msg.create_time }}</CreateTime>
+	<MsgType><![CDATA[text]]></MsgType>
+	<Content><![CDATA[{{ msg.content }}]]></Content>
+</xml>
