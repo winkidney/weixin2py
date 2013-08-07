@@ -51,7 +51,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 SITE_ID = 1
 
@@ -141,10 +141,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    #'django.contrib.admindocs',
 )
+# 拓展用户模块
+AUTH_PROFILE_MODULE = 'djangoadmin.myadmin.UserProfile'
+#拓展结束
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
