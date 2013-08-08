@@ -5,6 +5,7 @@ encoding//weixin2py/core/models.py=utf-8
 encoding//weixin2py/core/session_class.py=utf-8
 encoding//weixin2py/core/views.py=utf-8
 encoding//weixin2py/create_db.py=utf-8
+encoding//weixin2py/tools/book_query.py=utf-8
 encoding//weixin2py/tools/score_query.py=utf-8
 encoding//weixin2py/tools/xml_reader.py=utf-8
 encoding//weixin2py/weixin2py/msg_classes.py=utf-8

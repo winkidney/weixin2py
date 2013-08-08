@@ -33,7 +33,7 @@ class WeixinUser(models.Model):
     openid = models.CharField(max_length=40,verbose_name=u'微信OpenID')
     gouda_off = models.BooleanField(verbose_name=u'勾搭功能未打开')   #勾搭是否开启
     profile = models.OneToOneField(WeixinUserProfile,verbose_name=u'用户详细信息')
-    is_bind = models.BooleanField(verbose_name=u'是否绑定学号')
+    is_bind = models.BooleanField(verbose_name=u'已绑定学号')
     def __unicode__(self):
         return u"%s %s" % (self.id,self.openid) 
 #拓展用户的一个函数，当不存在profile的时候则制造一个profile

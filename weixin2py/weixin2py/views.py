@@ -1,19 +1,25 @@
 #coding:utf-8
 #views of weixin2py foleder
+#django模块导入
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+import datetime
 from django.views.decorators.csrf import csrf_exempt
 import hashlib
 from django.http import Http404
+#自定义模块导入
 from msg_classes import TextMsg,ImgMsg,PicTextMsg
 from tools.xml_reader import UserMsg
-#测试
-from core.views import create_new_user
 from tools import score_query
+from core.views import create_new_user,user_exist
+#数据库，全局变量
+from core.session_class import WeiSession
+from settings import SESSION_DICT
+
 #测试结束
 #全局变量
 TOKEN = 'kidney'
-SESSION_DICT = {}
+
 DEFAULT_MSG =U'''
 ---------------------------------------------------
 欢迎关注彼岸社区微信平台o(∩_∩)o 
@@ -56,16 +62,11 @@ def home(request):
         #处理微信发过来的post请求
     if request.method == 'POST':
         received_msg = UserMsg(request.body)
+        if not user_exist(received_msg):    #检测当前微信用户是否存在，如果不存在则创建一个新的用户，用户对应的django账户为微信openid，密码为openid
+            create_new_user(received_msg)   #创建一个新用户
         if received_msg.msg_type == 'text':
-            if received_msg.content == u'成绩':
-                msg = TextMsg()
-                msg_init(msg,received_msg)
-                query_result = score_query.main('031140816','19921226')
-                if query_result:
-                    msg.content = query_result
-                else:
-                    msg.content = u'查询失败，目测学校服务器抽风啦～～'
-                return render_to_response('response/text_to_user.xml',locals())
+            if received_msg.content in FUNCTION_DICT:
+                return FUNCTION_DICT[received_msg.content](received_msg)
             else:
                 msg = TextMsg()
                 msg_init(msg,received_msg)
@@ -85,10 +86,18 @@ def msg_init(msg,received_msg):
     msg.to_user_name = received_msg.from_user_name
     msg.create_time = str(int(received_msg.create_time)+1)
     return
-def get_score():
-    pass
+#分数查询函数，预计使用dict方式实现
+def get_score(received_msg):
+    msg = TextMsg()
+    msg_init(msg,received_msg)
+    query_result = score_query.main('031140816','19921226')
+    if query_result:
+        msg.content = query_result
+    else:
+        msg.content = u'查询失败，目测学校服务器抽风啦～～'
+    return render_to_response('response/text_to_user.xml',locals())
     
     
     
-FUNCTION_DICT = {u'成绩':get_score
+FUNCTION_DICT = {u'成绩':get_score,
                  }
