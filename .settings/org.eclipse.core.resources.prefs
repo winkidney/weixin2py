@@ -8,6 +8,7 @@ encoding//weixin2py/create_db.py=utf-8
 encoding//weixin2py/tools/book_query.py=utf-8
 encoding//weixin2py/tools/score_query.py=utf-8
 encoding//weixin2py/tools/xml_reader.py=utf-8
+encoding//weixin2py/weixin2py/__init__.py=utf-8
 encoding//weixin2py/weixin2py/msg_classes.py=utf-8
 encoding//weixin2py/weixin2py/settings.py=utf-8
 encoding//weixin2py/weixin2py/views.py=utf-8

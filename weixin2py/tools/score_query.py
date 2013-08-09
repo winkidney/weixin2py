@@ -52,10 +52,10 @@ def score_query(user_name,password,year='',term=''):
     try :
         score_response = urllib2.urlopen(score_query_request)
     except urllib2.URLError:
-        return '0' #错误代码0,网络连接错误
+        return 0 #错误代码0,网络连接错误
     result_html = score_response.read()
     if u"重新登录" in result_html:
-        return '1'#错误代码1,表示用户名密码错误
+        return 1#错误代码1,表示用户名密码错误
     str_result = clean_text(result_html)
     return str_result
 

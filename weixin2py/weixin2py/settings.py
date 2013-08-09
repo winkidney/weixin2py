@@ -200,24 +200,33 @@ LOGGING = {
 
 #我的全局变量设置
 SESSION_DICT = {}
+
 #我的session_dict监控线程
-#import threading,time
-#def session_brusher(session_dict):
-#	while 1:
-#		time.sleep(10)
-#		deleted_list = []
-#		print 'the dict now is '+str(SESSION_DICT)
-#		if session_dict:
-#			for key in session_dict:
-#				if (datetime.dataetime.now()-session_dict[key].lastcommit_time).minute > 15:
-#					deleted_list.append(key)
-#			for key in deleted_list:
-#				try:
-#					 del session_dict[key]
-#				except:
-#					pass
-#		else:
-#			continue								
-#brusher = threading.Thread(target=session_brusher,args=(SESSION_DICT,))
-#brusher.setDaemon(True)
-#brusher.start()
+import threading,time
+def session_brusher(session_dict):
+	while 1:
+		time.sleep(20)
+		deleted_list = []
+		print 'the dict now is '+str(SESSION_DICT)
+		if session_dict:
+			for key in session_dict:
+				if (datetime.dataetime.now()-session_dict[key].lastcommit_time).minute > 15:
+					deleted_list.append(key)
+			for key in deleted_list:
+				try:
+					 del session_dict[key]
+				except:
+					pass
+		else:
+			continue								
+import socket,sys
+s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+try:
+	s.bind(('127.0.0.1',10086))
+	brusher = threading.Thread(target=session_brusher,args=(SESSION_DICT,))
+	brusher.setDaemon(True)
+	brusher.start()
+except:
+	pass
+	
+	

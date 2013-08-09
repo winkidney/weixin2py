@@ -25,4 +25,5 @@ def user_exist(received_msg):
         return True
     except :
         return False
-def bind_user(recevied_msg):
+def bind_user(request,recevied_msg):
+    pass

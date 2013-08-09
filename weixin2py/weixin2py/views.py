@@ -64,14 +64,11 @@ def home(request):
         received_msg = UserMsg(request.body)
         if not user_exist(received_msg):    #检测当前微信用户是否存在，如果不存在则创建一个新的用户，用户对应的django账户为微信openid，密码为openid
             create_new_user(received_msg)   #创建一个新用户
-        if received_msg.msg_type == 'text':
-            if received_msg.content in FUNCTION_DICT:
+        if received_msg.msg_type == 'text': #处理文字类型的消息
+            if received_msg.content in FUNCTION_DICT: #使用一个dict对象进行匹配以免进行大量的if else语法，导致代码很难看
                 return FUNCTION_DICT[received_msg.content](received_msg)
             else:
-                msg = TextMsg()
-                msg_init(msg,received_msg)
-                msg.content = DEFAULT_MSG
-                return render_to_response('response/text_to_user.xml',locals())
+                return defult_response(received_msg)
         elif received_msg.msg_type == 'event':
             if received_msg.event == u'subscribe':
                 msg = TextMsg()
@@ -80,24 +77,54 @@ def home(request):
                 return render_to_response('response/text_to_user.xml',locals())
             else :
                 return HttpResponse('成功取消关注！')
-#一些公用的消息初始化    
+#一些公用的消息初始化,要在每一个消息生成之前调用这个函数，不然会出错 
 def msg_init(msg,received_msg):
     msg.from_user_name = received_msg.to_user_name
     msg.to_user_name = received_msg.from_user_name
     msg.create_time = str(int(received_msg.create_time)+1)
     return
-#分数查询函数，预计使用dict方式实现
+#默认回复
+def default_response(recived_msg):
+    msg = TextMsg()
+    msg_init(msg,received_msg)
+    msg.content = DEFAULT_MSG
+    return render_to_response('response/text_to_user.xml',locals())
+#以下所有的函数对象都返回一个httpresponse对象，都使用received_msg作为输入参数，因为要使用
+#openid作为会话对象
 def get_score(received_msg):
+    '''查询成绩'''
     msg = TextMsg()
     msg_init(msg,received_msg)
     query_result = score_query.main('031140816','19921226')
-    if query_result:
-        msg.content = query_result
-    else:
+    if query_result == 0: #错误代码0,网络错误
         msg.content = u'查询失败，目测学校服务器抽风啦～～'
+    elif query_result == 1: #错误代码2,用户名密码错误
+        msg.content = u'查询失败，用户名密码错误'
+    else:
+        msg.content = query_result
     return render_to_response('response/text_to_user.xml',locals())
-    
-    
-    
+def get_class_table():
+    '''查询课表'''
+    pass    
+def second_hand():
+    '''二手查询'''
+    pass
+def books_query():
+    '''图书馆借书查询'''
+    pass
+def get_notification():
+    '''通知'''
+    pass
+def get_news():
+    '''新闻'''
+    pass
+def gou_da():
+    '''勾搭功能'''
+def tu_cao():
+    '''吐槽'''
+    pass
+def help():
+    '''帮助系统'''
+    pass
 FUNCTION_DICT = {u'成绩':get_score,
                  }
