@@ -212,7 +212,10 @@ SESSION_DICT = {}
 #				if (datetime.dataetime.now()-session_dict[key].lastcommit_time).minute > 15:
 #					deleted_list.append(key)
 #			for key in deleted_list:
-#				del session_dict[key]
+#				try:
+#					 del session_dict[key]
+#				except:
+#					pass
 #		else:
 #			continue								
 #brusher = threading.Thread(target=session_brusher,args=(SESSION_DICT,))
