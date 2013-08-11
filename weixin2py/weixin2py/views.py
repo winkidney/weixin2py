@@ -46,7 +46,7 @@ BIND_MSG = u'''
 import threading,time
 def session_brusher(session_dict):
     while 1:
-        time.sleep(20)
+        time.sleep(120)
         deleted_list = []
         print 'the dict now is '+str(SESSION_DICT)
         if session_dict:
