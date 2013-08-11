@@ -115,7 +115,7 @@ def home(request):
                 SESSION_DICT[received_msg.from_user_name].status = u''
                 #验证会话，如果用户有会话存在则直接调用会话处理，如果没有则进行主菜单消息处理
             if current_session.status:
-                print current_session.status
+                current_session.update()
                 return FUNCTION_DICT[STATUS_DICT[current_session.status]](received_msg,1)   #传入一个标志’1‘来表示为子菜单状态
             #主菜单模式消息处理
             if received_msg.content in FUNCTION_DICT: #使用一个dict对象进行匹配以免进行大量的if else语法，导致代码很难看
@@ -228,6 +228,8 @@ def tu_cao():
     pass
 def help():
     '''帮助系统'''
+    pass
+def send_test():
     pass
 STATUS_DICT = {u'绑定':u'绑定',
                }
