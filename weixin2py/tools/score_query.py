@@ -67,8 +67,8 @@ def clean_text(src_html):
     clean_data = {}
     count = 0
     while 1:
-        clean_data[result[3+count*9]] = result[3+count*9+1] #不进行解码，保持原始的ascii字节流
-        #clean_data[result[3+count*9].decode('utf-8')] = result[3+count*9+1].decode('utf-8')    #解码为utf-8
+        clean_data[result[3+count*9]] = result[3+count*9+1] #不进行解码，保持原始的utf-8编码的ascii字节流
+        #clean_data[result[3+count*9].decode('utf-8')] = result[3+count*9+1].decode('utf-8')    #解码为unicode内部表示
         count = count+1
         if count*9+3 > length:
             break

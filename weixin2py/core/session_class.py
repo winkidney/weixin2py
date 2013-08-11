@@ -5,8 +5,10 @@ import datetime
 class WeiSession(object):
     '''微信助手会话类，用来存储用户的会话状态'''
     def __init__(self):
-        self.lsatcommit_time = datetime.datetime
-        self.status = ''
+        self.lastcommit_time = datetime.datetime.now()
+        self.status = u''
+    def update(self):
+        self.lastcommit_time = datetime.datetime.now()
     def menu_back(self,):
         self.status = self.status[0:-2]
     def menu_add(self,menu_obj):
