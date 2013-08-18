@@ -1,7 +1,0 @@
-每日一拍公众帐号
-地址：https://mp.weixin.qq.com
-
-用户名：hbmzxymryp
-密码：qwerasdf
-
-上面有开发文档，自己看，其他的东西暂时不要动，等开发好了，你就自己修改url和token
