@@ -19,7 +19,7 @@ from settings import SESSION_DICT
 
 #测试结束
 #全局变量
-TOKEN = 'kidney'
+from settings import TOKEN
 
 DEFAULT_MSG =u'''
 ---------------------------------------------------

@@ -200,3 +200,4 @@ LOGGING = {
 
 #我的全局变量设置
 SESSION_DICT = {}
+TOKEN = 'kidney'
