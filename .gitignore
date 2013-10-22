@@ -1,4 +1,6 @@
+localsettings.py
 *.py[cod]
+*.pyc
 
 # C extensions
 *.so

@@ -1,6 +1,14 @@
 #coding:utf-8
 # Django settings for weixin2py project.
 import os
+
+try:
+	from localsettings import *
+except:
+	dbname = ''
+	dbusername = ''
+	password = ''
+
 if 'SERVER_SOFTWARE' in os.environ:
 	DEBUG = False
 else:
@@ -30,9 +38,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'weixin2py',
-            'USER': 'weixin2py',
-            'PASSWORD': '19921226',    
+            'NAME': dbname,
+            'USER': dbusername,
+            'PASSWORD': password,    
             'HOST': 'localhost',                  
             'PORT': '3306',                      
         }
