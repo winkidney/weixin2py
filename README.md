@@ -1,4 +1,4 @@
-#weixin2py--微信公众平web服务器
+#weixin2py--微信公众平台web服务器
 
 ### 1.简介
 
