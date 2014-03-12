@@ -1,4 +1,4 @@
-#weixin2py--微信公众平台接口程序
+#weixin2py--微信公众平web服务器
 
 ### 1.简介
 
@@ -16,10 +16,17 @@
 
 需要可使用版本请移步：[这里](https://github.com/winkidney/weixin2py/tree/release1.0) 
 
- [博客](http://blog.sina.com/winkidney) 
+### 3.To Do List
+1. 简化程序，并将通用处理过程提取出来，让处理函数可以直接方便的处理消息
+2. 将用户session改到key-value数据库存储或者内存缓存，提高效率和可靠性。
+3. 修改数据库设定，让数据库具有通用性并允许拓展。
+4. 设计一套管理ui
+
+
+ [博客](http://blog.gg-workshop.com/) 
 
  [My-github](http://github.com/winkidney)
 
-by winkidney 20130818
+by winkidney 2014-03-12
 
 
