@@ -15,5 +15,6 @@ class WeiSession(object):
         self.status = self.status+menu_obj
     def exit(self):
         self.status =''
+        
 class WeiChatSession(object):
     pass

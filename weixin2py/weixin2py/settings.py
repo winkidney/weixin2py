@@ -1,18 +1,11 @@
 #coding:utf-8
 # Django settings for weixin2py project.
 import os
+PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '_c@$un4*ihb4(&hf&556485qi@)yc-x=rw17h05jhe!h#fg^3r'
 
-try:
-	from localsettings import *
-except:
-	dbname = ''
-	dbusername = ''
-	password = ''
-
-if 'SERVER_SOFTWARE' in os.environ:
-	DEBUG = False
-else:
-	DEBUG = True
+DEBUG = True
 	
 TEMPLATE_DEBUG = DEBUG
 
@@ -22,30 +15,17 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-if 'SERVER_SOFTWARE' in os.environ:
-    from bae.core import const
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'you_apply_database_name',
-            'USER': const.MYSQL_USER,
-            'PASSWORD': const.MYSQL_PASS,  
-            'HOST': const.MYSQL_HOST,  
-            'PORT': const.MYSQL_PORT,
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(PROJECT_ROOT, 'weixin2py.db'),                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': dbname,
-            'USER': dbusername,
-            'PASSWORD': password,    
-            'HOST': 'localhost',                  
-            'PORT': '3306',                      
-        }
-    }
-
+}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -95,6 +75,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+				PROJECT_ROOT+'/weixin2py/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -108,8 +89,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '_c@$un4*ihb4(&hf&556485qi@)yc-x=rw17h05jhe!h#fg^3r'
+
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -134,7 +115,7 @@ ROOT_URLCONF = 'weixin2py.urls'
 WSGI_APPLICATION = 'weixin2py.wsgi.application'
 
 TEMPLATE_DIRS = (
-				os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+				PROJECT_ROOT+'weixin2py/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -175,29 +156,9 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        },
-                 #my logger settings
-        'default': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join('/home/','all.log'), #或者直接写路径
-            'maxBytes': 1024*1024*5, # 5 MB
-            'backupCount': 5,
-            #'formatter':'standard',
-        },
-        'console':{
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            #'formatter': 'standard'
-        },
-                 #my logger ending
+        }
     },
     'loggers': {
-        'django': {
-            'handlers': ['default','console'],
-            'level': 'DEBUG',
-            'propagate': False
-        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
@@ -205,7 +166,5 @@ LOGGING = {
         },
     }
 }
-
 #我的全局变量设置
-SESSION_DICT = {}
-TOKEN = 'kidney'
+TOKEN = ''

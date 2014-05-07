@@ -1,7 +1,7 @@
 localsettings.py
 *.py[cod]
 *.pyc
-
+tuwei*
 # C extensions
 *.so
 
