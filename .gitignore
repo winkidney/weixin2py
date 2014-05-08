@@ -1,3 +1,4 @@
+.settings
 localsettings.py
 *.py[cod]
 *.pyc

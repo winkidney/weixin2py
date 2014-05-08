@@ -3,7 +3,7 @@
 # and some tool function.
 #read xml text and return a xml object
 import datetime
-import re
+import re,hashlib
 
 #basic info
 re_msg_type = re.compile(r"<MsgType><!\[CDATA\[(.*?)\]\]></MsgType>")
