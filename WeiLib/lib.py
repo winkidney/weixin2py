@@ -83,7 +83,7 @@ class GetMsg(object):
         self.cereate_time = self.get_info(re_msg_ctime, msg)
         self.msg_type = self.get_info(re_msg_type, msg)
         self.msg_id = self.get_info(re_msg_id, msg)
-        
+        msgtype = self.msg_type
         if msgtype == 'text':
             self.get_text_msg( msg )
         elif msgtype == 'image':
