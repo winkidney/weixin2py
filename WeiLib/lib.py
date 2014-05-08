@@ -131,8 +131,8 @@ class ResMsg(object):
     function_flag = ''
     
     def __init__(self, to_user, from_user, ctime, func_flag=0):
-        self.to_user_name = to_user
-        self.from_user_name = from_user
+        self.to_user_name = from_user
+        self.from_user_name = to_user
         self.create_time = int(ctime)+1
         self.function_flag = func_flag
         
