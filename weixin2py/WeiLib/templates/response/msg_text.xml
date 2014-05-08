@@ -1,0 +1,7 @@
+{% extends "response/msg_base.xml" %}
+
+{% block ext %}
+	<MsgType><![CDATA[text]]></MsgType>
+	<Content><![CDATA[{{ msg.content }}]]></Content>
+    <FuncFlag>0</FuncFlag>
+{% endblock %}

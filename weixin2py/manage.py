@@ -3,7 +3,11 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weixin2py.settings")
+    if os.path.isfile("gamegear/localsettings.py"):
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weixin2py.localsettings")
+        #print 'localsettings'
+    else:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weixin2py.settings")
 
     from django.core.management import execute_from_command_line
 

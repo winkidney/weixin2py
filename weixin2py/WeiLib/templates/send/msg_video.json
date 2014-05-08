@@ -1,0 +1,10 @@
+{
+    "touser":"OPENID",
+    "msgtype":"video",
+    "video":
+    {
+      "media_id":"MEDIA_ID",
+      "title":"TITLE",
+      "description":"DESCRIPTION"
+    }
+} 

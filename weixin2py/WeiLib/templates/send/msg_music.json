@@ -1,0 +1,14 @@
+{
+    "touser":"OPENID",
+    "msgtype":"music",
+    "music":
+    {
+      "title":"MUSIC_TITLE",
+      "description":"MUSIC_DESCRIPTION",
+      "musicurl":"MUSIC_URL",
+      "hqmusicurl":"HQ_MUSIC_URL",
+      "thumb_media_id":"THUMB_MEDIA_ID" 
+    }
+}
+
+ 

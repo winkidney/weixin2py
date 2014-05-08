@@ -1,0 +1,8 @@
+{
+    "touser":"OPENID",
+    "msgtype":"text",
+    "text":
+    {
+         "content":"Hello World"
+    }
+}

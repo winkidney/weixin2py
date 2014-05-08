@@ -1,0 +1,8 @@
+{
+    "touser":"OPENID",
+    "msgtype":"image",
+    "image":
+    {
+      "media_id":"MEDIA_ID"
+    }
+} 

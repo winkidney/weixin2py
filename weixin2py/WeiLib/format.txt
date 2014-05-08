@@ -1,23 +1,23 @@
-//文本消息
+//鏂囨湰
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
 <CreateTime>1399455419</CreateTime>
 <MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[测试消息内容]]></Content>
+<Content><![CDATA[娑堟伅鍐呭]]></Content>
 <MsgId>1234567890123456</MsgId>
 </xml>
-//语音消息
+//聛0聢7聛0聤7聛0聢6聛0聥0聛0聢3聛0聥4聛0聢3聛0聞4
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
 <CreateTime>1399455609</CreateTime>
 <MsgType><![CDATA[voice]]></MsgType>
-<Content><![CDATA[阿么么]]></Content>
+<Content><![CDATA[隆茫聛0聞4聛0聡1聛0聟7聛0聡1聛0聟7]]></Content>
 <MsgId>1234567890123456</MsgId>
 </xml>
 
-//图片消息
+//聛0聢1聛0聠4聛0聡4聛0聟1聛0聢3聛0聥4聛0聢3聛0聞4
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
@@ -27,7 +27,7 @@
 <MsgId>1234567890123456</MsgId>
 </xml>
 
-//位置消息
+//聛0聢2聛0聠3聛0聣0聛0聡1聛0聢3聛0聥4聛0聢3聛0聞4
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
@@ -40,7 +40,7 @@
 <MsgId>1234567890123456</MsgId>
 </xml>
 
-//关注事件
+//聛0聠1聛0聣1隆脕聛0聞4聛0聡8聛0聡0聛0聠4聛0聥6
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
@@ -49,7 +49,7 @@
 <Event><![CDATA[subscribe]]></Event>
 </xml>
 
-//取消关注
+//聛0聡6聛0聞3聛0聢3聛0聥4聛0聠1聛0聣1隆脕聛0聞4
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
@@ -58,7 +58,7 @@
 <Event><![CDATA[unsubscribe]]></Event>
 </xml>
 
-//菜单事件
+//聛0聟5聛0聡9聛0聟8聛0聞6聛0聡8聛0聡0聛0聠4聛0聥6
 <xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>

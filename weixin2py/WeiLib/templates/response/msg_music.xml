@@ -1,0 +1,11 @@
+{% extends "response/msg_base.xml" %}
+{% block ext %}
+<MsgType><![CDATA[music]]></MsgType>
+<Music>
+<Title><![CDATA[{{ msg.title }}]]></Title>
+<Description><![CDATA[{{ msg.description }}]]></Description>
+<MusicUrl><![CDATA[{{ msg.music_url }}]]></MusicUrl>
+<HQMusicUrl><![CDATA[{{ msg.hq_music_url }}]]></HQMusicUrl>
+<ThumbMediaId><![CDATA[{{ msg.media_id }}]]></ThumbMediaId>
+</Music>
+{% endblock %}

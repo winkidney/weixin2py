@@ -1,12 +1,12 @@
 #coding:utf-8
-# Django settings for weixin2py project.
+# Django localsettings for weixin2py project.
 import os
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '_c@$un4*ihb4(&hf&556485qi@)yc-x=rw17h05jhe!h#fg^3r'
 
 DEBUG = True
-	
+    
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -75,7 +75,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-				PROJECT_ROOT+'/weixin2py/static/',
+                PROJECT_ROOT+'/weixin2py/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -115,7 +115,7 @@ ROOT_URLCONF = 'weixin2py.urls'
 WSGI_APPLICATION = 'weixin2py.wsgi.application'
 
 TEMPLATE_DIRS = (
-				PROJECT_ROOT+'weixin2py/templates/',
+                PROJECT_ROOT+'/WeiLib/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -128,15 +128,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'WeiLib',
+    'tuwei',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     #'django.contrib.admindocs',
 )
-# 拓展用户模块
+# ��չ�û�ģ��
 AUTH_PROFILE_MODULE = 'djangoadmin.myadmin.UserProfile'
-#拓展结束
+#��չ����
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -166,5 +167,10 @@ LOGGING = {
         },
     }
 }
-#我的全局变量设置
-TOKEN = ''
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+TOKEN = 'kidney'

@@ -1,0 +1,9 @@
+{% extends "response/msg_base.xml" %}
+{% block ext %}
+<MsgType><![CDATA[video]]></MsgType>
+<Video>
+<MediaId><![CDATA[{{ msg.media_id }}]]></MediaId>
+<Title><![CDATA[{{ msg.title }}]]></Title>
+<Description><![CDATA[{{ msg.description }}]]></Description>
+</Video> 
+{% endblock %}
