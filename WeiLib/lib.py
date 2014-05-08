@@ -37,7 +37,7 @@ re_eventkey = re.compile(r"<EventKey><!\[CDATA\[(.*?)\]\]></EventKey>")
 class GetMsg(object):
     '''输入一个xml文本字符串对象，生成一个object并返回'''
     def get_info(self, regx, msg):
-        result = re.findall(regx, msg_text)
+        result = re.findall(regx, msg)
         if result:
             return result[0]
        
