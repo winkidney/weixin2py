@@ -80,7 +80,7 @@ class GetMsg(object):
         并调用get_object函数获得一个包含消息各个属性的对象'''
         self.to_user_name = self.get_info(re_msg_tuid, msg)
         self.from_user_name = self.get_info(re_msg_fuid, msg)
-        self.cereate_time = self.get_info(re_msg_ctime, msg)
+        self.create_time = self.get_info(re_msg_ctime, msg)
         self.msg_type = self.get_info(re_msg_type, msg)
         self.msg_id = self.get_info(re_msg_id, msg)
         msgtype = self.msg_type
