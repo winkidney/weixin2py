@@ -13,7 +13,7 @@ def about_handler(recv_msg, *args, **kwargs):
     return text_response(recv_msg, content)
 
 def subscrib_handler(recv_msg, *args, **kwargs):
-    content = """键入命令
+    content = """键入小写命令
     view   查看活动
     input  发起活动
     help   帮助信息
