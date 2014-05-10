@@ -8,7 +8,9 @@ from django.views.decorators.csrf import csrf_exempt
 import hashlib,re
 from django.http import Http404
 
-
+from WeiLib.router import file_router
+from tuwei.router import router_patterns
+                           
 from tuwei.models import WeixinUser
 from WeiLib.lib import (WeiSession,GetMsg,TextMsg,check_signature)
 
@@ -31,20 +33,7 @@ def home(request):
             return myresponse
         
     if request.method == 'POST':
+        #check_signature(request, TOKEN)
         recv_msg = GetMsg(request.body)
-        if recv_msg.msg_type == 'text': 
-            msg = TextMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
-            msg.make_msg("微信收到您的消息回复了\n测试换行")
-            return render_to_response('response/msg_text.xml', 
-                                      {'msg' : msg,}
-                                      )
-                
-
-        elif recv_msg.msg_type == 'event':
-            if recv_msg.event == u'subscribe':
-                msg = TextMsg()
-                msg_init(msg,recv_msg)
-                msg.content = DEFAULT_MSG
-                return render_to_response('response/text_to_user.xml',locals())
-            else :
-                return HttpResponse('成功取消关注！')
+        return file_router(router_patterns, recv_msg)
+        

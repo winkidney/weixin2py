@@ -4,6 +4,8 @@
 #read xml text and return a xml object
 import datetime
 import re,hashlib
+from django.shortcuts import render_to_response
+
 
 #basic info
 re_msg_type = re.compile(r"<MsgType><!\[CDATA\[(.*?)\]\]></MsgType>")
@@ -50,7 +52,7 @@ class GetMsg(object):
         '''图片消息'''
 
         self.pic_url =  self.get_info(re_img_url, msg)
-        self.media_id = self.ge_info(re_media_id, msg)
+        self.media_id = self.get_info(re_media_id, msg)
         
     def get_location_msg(self, msg):
         '''地理位置消息'''
@@ -76,8 +78,8 @@ class GetMsg(object):
         self.event_key =  self.get_info(re_eventkey, msg)
         
     def __init__(self, msg):
-        '''传入一个xml字符串来初始化类，自动生成一个文档树，
-        并调用get_object函数获得一个包含消息各个属性的对象'''
+        """genetate a message object
+        """
         self.to_user_name = self.get_info(re_msg_tuid, msg)
         self.from_user_name = self.get_info(re_msg_fuid, msg)
         self.create_time = self.get_info(re_msg_ctime, msg)
@@ -195,4 +197,24 @@ def check_signature(request, TOKEN):
         else:
             return False
     else:
-        return False      
+        return False    
+    
+
+
+def text_response(recv_msg, content):
+    msg = TextMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
+    msg.make_msg(content)
+    return render_to_response('response/msg_text.xml', 
+                                      {'msg' : msg,}
+                                     )
+    
+def image_response(recv_msg, media_id):
+    msg = ImgMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
+    msg.make_msg(media_id)
+    return render_to_response('response/msg_text.xml', 
+                                      {'msg' : msg,}
+                                     ) 
+######### router - handlers ########    
+ 
+    
+ 
