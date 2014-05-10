@@ -14,7 +14,7 @@ class WeixinUser(models.Model):
     auth_user = models.OneToOneField(User,blank=True)#拓展用户
     nickname = models.CharField(max_length=30, blank=True, verbose_name=u'昵称')
     openid = models.CharField(max_length=40,unique=True, verbose_name=u'OpenID')
-    tel = models.CharField(max_length=40, blank=True)
+    tel = models.CharField(max_length=40, blank=True, verbose_name=u"电话")
      
     def __unicode__(self):
         return u"%s %s" % (self.id,self.openid) 
@@ -27,3 +27,6 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile.user = instance
         profile.save()
 #拓展结束
+
+
+

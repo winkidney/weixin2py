@@ -177,7 +177,14 @@ class PicTextMsg(ResMsg):
               'pic_url' : pic_url,
               'url': url,}
         self.articles.append(item)
-
+        
+class PTItem(object):
+    def __init__(self, title, description, pic_url, url):
+        self.title = title
+        self.description = description
+        self.pic_url = pic_url
+        self.url = url
+    
 
 def check_signature(request, TOKEN):
     '''检查消息是否是微信发过来的'''
@@ -212,6 +219,18 @@ def image_response(recv_msg, media_id):
     msg = ImgMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
     msg.make_msg(media_id)
     return render_to_response('response/msg_text.xml', 
+                                      {'msg' : msg,}
+                                     ) 
+    
+def pic_text_response(recv_msg, article_count, msg_item):
+    msg = PicTextMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
+    msg.make_msg(article_count)
+    if isinstance(msg_item, PTItem):
+        msg.new_item(msg_item.title, msg_item.description, msg_item.pic_url, msg_item.url)
+    if isinstance(msg_item, list):
+        for item in msg_item:
+            msg.new_item(item.title, item.description, item.pic_url, item.url)
+    return render_to_response('response/msg_pic_text.xml', 
                                       {'msg' : msg,}
                                      ) 
 ######### router - handlers ########    
