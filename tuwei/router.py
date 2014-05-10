@@ -5,12 +5,16 @@
 
 import re
 
-from tuwei.handlers import help_handler
+from tuwei.handlers import (help_handler,about_handler)
 
 
-
+"""
+参考信息：
+消息类型：text ,event,image, video, link , location,
+"""
 router_patterns =[
          # 消息类型  消息文字（非文字类型消息留空）  操作函数
-         ('text',re.compile('^帮助$'),help_handler),
+         ('text', re.compile('^帮助$'), help_handler),
+         ('text', re.compile('^关于$'), about_handler),
          ]
 
