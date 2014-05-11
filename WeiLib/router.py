@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding:utf-8
-#WeiLib/handlers.py - router handlers for WeiLib
+#WeiLib/router.py - router handlers for WeiLib
+#include router function and router pattern response
 #ver 0.1 by winkidney 2014.05.10
 
 import re
