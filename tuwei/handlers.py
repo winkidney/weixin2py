@@ -5,6 +5,7 @@
 from WeiLib.lib import PTItem
 from WeiLib.lib import text_response,pic_text_response
 
+
 def test_handler(recv_msg, *args, **kwargs):
     title = "测试图文消息"
     description = "图文消息描述"

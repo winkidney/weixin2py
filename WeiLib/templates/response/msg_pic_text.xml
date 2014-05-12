@@ -1,18 +1,17 @@
 {% extends "response/msg_base.xml" %}
 {% block ext %}
-     <MsgType><![CDATA[news]]></MsgType>
-     <ArticleCount>{{ msg.article_count }}</ArticleCount>
-     <Articles>
+ <MsgType><![CDATA[news]]></MsgType>
+ <ArticleCount>{{ msg.article_count }}</ArticleCount>
+ <Articles>
 {%for item in msg.articles %}
-         <item>
-         <Title><![CDATA[{{ item.title }}]]></Title> 
-         <Description><![CDATA[{{ item.description }}]]></Description>
-         <PicUrl><![CDATA[{{ item.pic_url }}]]></PicUrl>
-         <Url><![CDATA[{{ item.url }}]]></Url>
-         </item>
+ <item>
+ <Title><![CDATA[{{ item.title }}]]></Title> 
+ <Description><![CDATA[{{ item.description }}]]></Description>
+ <PicUrl><![CDATA[{{ item.pic_url }}]]></PicUrl>
+ <Url><![CDATA[{{ item.url }}]]></Url>
+ </item>
 {% endfor %}
-    </Articles>
-    <FuncFlag>1</FuncFlag>
+</Articles>
 {% endblock %}
 
 
