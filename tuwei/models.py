@@ -1,5 +1,6 @@
 #coding:utf-8
-#in folder 'core'
+#tuwei/models.py - database definition file
+#by kidney 2014.05.12
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -27,6 +28,18 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile.user = instance
         profile.save()
 #拓展结束
+
+    
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -155,6 +155,7 @@ class MusicMsg(ResMsg):
         self.music_url = music_url
         self.hq_music_url = hq
         self.media_id = media_id
+        
 class ImgMsg(ResMsg):
     
     """Image message"""
