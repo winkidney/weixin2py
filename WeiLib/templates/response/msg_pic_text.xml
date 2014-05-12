@@ -12,6 +12,7 @@
  </item>
 {% endfor %}
 </Articles>
+<FuncFlag>1</FuncFlag>
 {% endblock %}
 
 

@@ -168,7 +168,7 @@ class PicTextMsg(ResMsg):
     
     def make_msg(self, article_count):
         
-        self.article_count = ''
+        self.article_count = article_count
         self.articles = []
         
     def new_item(self, title, description, pic_url, url):
