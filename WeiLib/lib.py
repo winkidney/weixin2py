@@ -3,9 +3,9 @@
 # and some tool function.
 #read xml text and return a xml object
 import datetime
-import re,hashlib
+import re,hashlib,urllib2,urllib
 from django.shortcuts import render_to_response
-
+from django.template.loader import render_to_string
 
 #basic info
 re_msg_type = re.compile(r"<MsgType><!\[CDATA\[(.*?)\]\]></MsgType>")
@@ -184,6 +184,37 @@ class PTItem(object):
         self.description = description
         self.pic_url = pic_url
         self.url = url
+        
+class MButton(object):
+    """ button class of the weichat meun"""
+    
+    def __init__(self, name, **kwargs):
+        self.type = None
+        self.key = None
+        self.url = None
+        self.sub_buttons = []
+        self.name = name
+        url = kwargs.get('url')
+        key = kwargs.get('key')
+        if url or key:
+            if url:
+                self.make_view(url)
+            else:
+                self.make_click(key)
+                
+    def make_click(self, key):
+        self.type = 'click'
+        self.key = key
+        
+    def make_view(self, url):
+        self.type = 'view'
+        self.url = url
+        
+    def add_button(self, button):
+        if isinstance(button, MButton):
+            self.sub_buttons.append(button)
+        else:
+            raise TypeError
     
 
 def check_signature(request, TOKEN):
@@ -205,6 +236,38 @@ def check_signature(request, TOKEN):
             return False
     else:
         return False    
+   
+def get_token(appid, appsecret):
+    url = """https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%(appid)s&secret=%(appsecret)s""" \
+    % {'appid' : appid, 'appsecret' : appsecret}
+    try:
+        result = ''
+        result = urllib2.urlopen(url, timeout=20).read()
+    except:
+        return None
+    result = re.findall('"access_token":"(.*?)"', result)
+    if result:
+        return result[0]
+    return None
+
+def create_menu(access_token, menu_list):
+    url = """ https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s""" \
+    % access_token
+    data = render_to_string('send/menu_create.json', {'menu_list': menu_list})
+    
+    endata = data.encode('utf-8')
+    open('tmp.json','w').write(endata)
+    try:
+        result = ""
+        result = urllib2.urlopen(url, endata, 20).read()
+    except:
+        return False
+    result = re.findall('ok', result)
+    if result:
+        return True
+    else:
+        return False
+        
     
 
 

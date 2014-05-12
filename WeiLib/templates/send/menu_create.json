@@ -1,32 +1,33 @@
 {
      "button":[
-     {	
-          "type":"click",
-          "name":"今日歌曲",
-          "key":"V1001_TODAY_MUSIC"
-      },
+     {% for menu in menu_list %}
       {
-           "type":"click",
-           "name":"歌手简介",
-           "key":"V1001_TODAY_SINGER"
-      },
-      {
-           "name":"菜单",
-           "sub_button":[
-           {	
-               "type":"view",
-               "name":"搜索",
-               "url":"http://www.soso.com/"
-            },
-            {
-               "type":"view",
-               "name":"视频",
-               "url":"http://v.qq.com/"
-            },
-            {
-               "type":"click",
-               "name":"赞一下我们",
-               "key":"V1001_GOOD"
-            }]
-       }]
+           "name":"{{ menu.name }}",
+           {% if not menu.sub_buttons %}
+            "type":"{{ menu.type }}",
+                {% if menu.type == 'view' %}
+                "url":"{{ menu.url }}",
+                {% endif %}
+                {% if menu.type == 'click' %}
+                "key":"{{ menu.key }}",
+                {% endif %}
+           {% else %}
+               "sub_button":[
+               {% for button in menu.sub_buttons %}
+               {	
+                    "name":"{{ button.name }}",
+                    {% if button.type == 'view' %}
+                    "url":"{{ button.url }}",
+                    {% endif %}
+                    {% if button.type == 'click' %}
+                    "key":"{{ button.key }}",
+                    {% endif %}
+                    "type":"{{ button.type }}"
+                }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                ]
+           {% endif %}
+       }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+       ]
 }

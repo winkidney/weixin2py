@@ -1,4 +1,4 @@
-#coding:uft-8
+#coding:utf-8
 # WeiLib/sample_msg.py - contains current weichat msg example
 # and some other info. 
 msg_send_kefu = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN"
@@ -11,8 +11,16 @@ msg_send_kefu_resp = """
 """
 multi_msg_send = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN"
 
-send_msg_text= """
-<xml>
+recv_msg_text = """<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[fromUser]]></FromUserName> 
+<CreateTime>1348831860</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[this is a test]]></Content>
+<MsgId>1234567890123456</MsgId>
+</xml>"""
+
+send_msg_text= """<xml>
 <ToUserName><![CDATA[fucker]]></ToUserName>
 <FromUserName><![CDATA[openidkidney]]></FromUserName>
 <CreateTime>1399455419</CreateTime>
@@ -21,19 +29,17 @@ send_msg_text= """
 <MsgId>1234567890123456</MsgId>
 </xml>
 """
-recv_msg_image = """
- <xml>
- <ToUserName><![CDATA[toUser]]></ToUserName>
- <FromUserName><![CDATA[fromUser]]></FromUserName>
- <CreateTime>1348831860</CreateTime>
- <MsgType><![CDATA[image]]></MsgType>
- <PicUrl><![CDATA[this is a url]]></PicUrl>
- <MediaId><![CDATA[media_id]]></MediaId>
- <MsgId>1234567890123456</MsgId>
- </xml>
+recv_msg_image = """<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[fromUser]]></FromUserName>
+<CreateTime>1348831860</CreateTime>
+<MsgType><![CDATA[image]]></MsgType>
+<PicUrl><![CDATA[this is a url]]></PicUrl>
+<MediaId><![CDATA[media_id]]></MediaId>
+<MsgId>1234567890123456</MsgId>
+</xml>
 """
-send_msg_image = """
-<xml>
+send_msg_image = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
 <CreateTime>1348831860</CreateTime>
@@ -42,8 +48,7 @@ send_msg_image = """
 <MsgId>1234567890123456</MsgId>
 </xml>
 """
-recv_msg_voice = """
-<xml>
+recv_msg_voice = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
 <CreateTime>1357290913</CreateTime>
@@ -54,8 +59,7 @@ recv_msg_voice = """
 </xml>
 """
 
-recv_msg_video = """
-<xml>
+recv_msg_video = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
 <CreateTime>1357290913</CreateTime>
@@ -66,8 +70,7 @@ recv_msg_video = """
 </xml>
 """
 
-recv_msg_location = """
-<xml>
+recv_msg_location = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
 <CreateTime>1351776360</CreateTime>
@@ -77,11 +80,10 @@ recv_msg_location = """
 <Scale>20</Scale>
 <Label><![CDATA[位置信息]]></Label>
 <MsgId>1234567890123456</MsgId>
-</xml>
+</xml> 
 """
 
-recv_msg_link = """
-<xml>
+recv_msg_link = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
 <CreateTime>1351776360</CreateTime>
@@ -92,13 +94,12 @@ recv_msg_link = """
 <MsgId>1234567890123456</MsgId>
 </xml>
 """
-recv_msg_event = """
-<xml><ToUserName><![CDATA[toUser]]></ToUserName>
+recv_msg_event = """<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[FromUser]]></FromUserName>
 <CreateTime>123456789</CreateTime>
 <MsgType><![CDATA[event]]></MsgType>
-<Event><![CDATA[EVENT]]></Event>
-<EventKey><![CDATA[EVENTKEY]]></EventKey>
+<Event><![CDATA[subscribe]]></Event>
 </xml>
 """
 event_type = {'subscribe':'',
@@ -106,8 +107,8 @@ event_type = {'subscribe':'',
               'CLICK' : '',              
               }
 
-recv_msg_scan = """
-<xml><ToUserName><![CDATA[toUser]]></ToUserName>
+recv_msg_scan = """<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[FromUser]]></FromUserName>
 <CreateTime>123456789</CreateTime>
 <MsgType><![CDATA[event]]></MsgType>
@@ -116,8 +117,8 @@ recv_msg_scan = """
 </xml>
 """
 
-msg_scene_subscribe = """
-<xml><ToUserName><![CDATA[toUser]]></ToUserName>
+msg_scene_subscribe = """<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[FromUser]]></FromUserName>
 <CreateTime>123456789</CreateTime>
 <MsgType><![CDATA[event]]></MsgType>
@@ -126,8 +127,7 @@ msg_scene_subscribe = """
 </xml>
 """
 
-recv_msg_reloc = """
-<xml>
+recv_msg_reloc = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
 <CreateTime>123456789</CreateTime>
@@ -137,4 +137,39 @@ recv_msg_reloc = """
 <Longitude>113.352425</Longitude>
 <Precision>119.385040</Precision>
 </xml>
+"""
+
+menu_template = """
+ {
+     "button":[
+     {    
+          "type":"click",
+          "name":"今日歌曲",
+          "key":"V1001_TODAY_MUSIC"
+      },
+      {
+           "type":"click",
+           "name":"歌手简介",
+           "key":"V1001_TODAY_SINGER"
+      },
+      {
+           "name":"菜单",
+           "sub_button":[
+           {    
+               "type":"view",
+               "name":"搜索",
+               "url":"http://www.soso.com/"
+            },
+            {
+               "type":"view",
+               "name":"视频",
+               "url":"http://v.qq.com/"
+            },
+            {
+               "type":"click",
+               "name":"赞一下我们",
+               "key":"V1001_GOOD"
+            }]
+       }]
+ }
 """
