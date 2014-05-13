@@ -8,7 +8,7 @@ import re
 from WeiLib.handlers import default_handler
 from WeiLib.models import (DBTextMsg,PatternT2T,DBImgTextMsg,PatternT2PT,
                            PatternE2PT,PatternE2T)
-from WeiLib.lib import text_response,pic_text_response,PicTextMsg
+from WeiLib.lib import text_response,pic_text_response,PicTextMsg,PTItem
 
 def base_router(recv_msg, router_patterns):
     for type,key,handler in router_patterns:

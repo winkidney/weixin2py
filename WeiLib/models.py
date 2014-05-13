@@ -53,7 +53,8 @@ class PatternE2T(models.Model):
                             default='event',verbose_name="消息类型")
     event = models.CharField(max_length=30,
                              choices=EVENTS,
-                             default='CLICK',verbose_name="事件类型")
+                             default='CLICK',verbose_name="事件类型",
+                             help_text="除非事件类型为“自定义事件或者点击链接跳转事件，否则不要填写本字段”")
     event_key = models.CharField(blank=True, max_length=50,help_text='对于自定义菜单事件这个是必填的！')
     handler = models.ForeignKey(DBTextMsg, verbose_name="回复消息")
 
@@ -71,7 +72,8 @@ class PatternE2PT(models.Model):
     event = models.CharField(max_length=30,
                              choices=EVENTS,
                              default='CLICK',verbose_name="事件类型")
-    event_key = models.CharField(blank=False, max_length=50)
+    event_key = models.CharField(blank=True, max_length=50, 
+                                 help_text="除非事件类型为“自定义事件或者点击链接跳转事件，否则不要填写本字段”")
     handler = models.ManyToManyField(DBImgTextMsg, verbose_name="回复消息", help_text="最多允许五条，不然会出错")
 
 class PatternT2PT(models.Model):
@@ -84,7 +86,8 @@ class PatternT2PT(models.Model):
                             choices=MSG_TYPES,
                             default='text',
                             help_text="除非你清楚这个字段的含义，否则请不要随意更改")
-    cotent = models.CharField(max_length=50, blank=True)
+    content = models.CharField(max_length=50, blank=True,verbose_name="需要匹配的消息",
+                              help_text="使用正则表达式")
     handler = models.ManyToManyField(DBImgTextMsg, verbose_name="回复消息", help_text="最多允许五条，不然会出错")
 
 class PatternT2T(models.Model):
@@ -99,7 +102,7 @@ class PatternT2T(models.Model):
                             default='text',
                             help_text="除非你清楚这个字段的含义，否则请不要随意更改")
     content = models.CharField(max_length=100, blank=True,verbose_name="收到的消息",
-                               help_text="支持正则表达式")
+                               help_text="使用正则表达式")
     handler = models.ForeignKey(DBTextMsg, verbose_name="响应的消息内容")
 
 
