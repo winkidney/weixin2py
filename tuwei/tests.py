@@ -19,7 +19,7 @@ class SimpleTest(TestCase):
         """
         self.assertEqual(1 + 1, 2)
 
-def create_btns(token):
+def create_btns():
     btn1 = MButton('活动相关')
     btn2 = MButton('我来组织')
     btn3 = MButton('关于我们')

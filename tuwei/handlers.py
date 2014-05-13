@@ -14,7 +14,7 @@ def test_handler(recv_msg, *args, **kwargs):
     items = []
     items.append(PTItem(title, description, pic_url, url))
     items.append(PTItem(title, description, pic_url, url))
-    return pic_text_response(recv_msg, 2, items)
+    return pic_text_response(recv_msg, items)
 
 def about_handler(recv_msg, *args, **kwargs):
     content = """

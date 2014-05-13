@@ -42,7 +42,8 @@ class GetMsg(object):
         result = re.findall(regx, msg)
         if result:
             return result[0]
-       
+        else:
+            return ''       #返回空字符以免匹配的时候报错
     def get_text_msg(self, msg):
         '''文本消息'''
 
@@ -166,11 +167,14 @@ class ImgMsg(ResMsg):
 class PicTextMsg(ResMsg):
     
     '''图文消息类'''
-    
+    def __init__(self, to_user, from_user, ctime, func_flag=0):
+        super(PicTextMsg, self).__init__(to_user, from_user, ctime, func_flag=0)
+        self.articles = []
+        
     def make_msg(self, article_count):
         
         self.article_count = article_count
-        self.articles = []
+        
         
     def new_item(self, title, description, pic_url, url):
         item ={'title' : title,
@@ -286,14 +290,16 @@ def image_response(recv_msg, media_id):
                                       {'msg' : msg,}
                                      ) 
     
-def pic_text_response(recv_msg, article_count, msg_item):
+def pic_text_response(recv_msg, msg_item):
     msg = PicTextMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
-    msg.make_msg(article_count)
     if isinstance(msg_item, PTItem):
+        article_count = 1
         msg.new_item(msg_item.title, msg_item.description, msg_item.pic_url, msg_item.url)
     if isinstance(msg_item, list):
+        article_count = len(msg_item)
         for item in msg_item:
             msg.new_item(item.title, item.description, item.pic_url, item.url)
+    msg.make_msg(article_count)
     return render_to_response('response/msg_pic_text.xml', 
                                       {'msg' : msg,}
                                      ) 
