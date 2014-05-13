@@ -7,11 +7,17 @@
 * 有什么 意见或者建议请发issue
 
 ### 2. 特性
-* 当用户发来第一条消息的时候，自动检测用户是否存在并生成一个唯一的用户（使用openid），存储到数据库。
+* 当用户发来第一条消息的时候，自动检测用户是否存在并生成一个唯一的用户（使用openid），存储到数据库。(新版本中尚未实现)
 * 可拔插设计，提供django app ‘WeiLib’，里面有大部分可能用到的工具类和工具函数，需要的时候，新建你的django app，并且在app中使用WeiLib即可。
-* 消息模版，存储在weixin2py/templates下，方便使用render_to_response进行处理。
+* 消息模版,WeiLil.llib中包含了text_response和pic_text_response函数，传入参数可以在任意view或者handler中使用.
 * 示例应用中将实现一个简单的缓存session功能。更改你的缓存后端或者更改缓存接口即可。
-* 新增路由功能，使用正则表达式对回复进行匹配，可以在自己的view里定义
+* 新增路由功能((数据库路由和文件路由)，使用正则表达式对回复进行匹配，可以在自己的router.py中定义router规则，类似    
+```python
+my_router = [
+            ('text', re.compile'^关于$', about_handler),
+            ]
+```
+程序会匹配关键字并使用handler返回相应。    
 
 目前新版本开发中，不保证任何可用性，需要老版（代码很丑陋）请移步：[这里](https://github.com/winkidney/weixin2py/tree/release1.0) 
 
