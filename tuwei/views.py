@@ -20,7 +20,7 @@ try:
 except:
     from weixin2py.settings import TOKEN
 #router 必须是一个list实例
-routers = [base_router, db_router ]
+routers = [base_router, db_router]
 
        
 @csrf_exempt  

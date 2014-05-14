@@ -9,7 +9,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from WeiLib.lib import create_menu,MButton
+from WeiLib.lib import create_menu,MButton,get_token
 from django.template.loader import render_to_string
 
 class SimpleTest(TestCase):
@@ -20,26 +20,32 @@ class SimpleTest(TestCase):
         self.assertEqual(1 + 1, 2)
 
 def create_btns():
-    btn1 = MButton('活动相关')
-    btn2 = MButton('我来组织')
-    btn3 = MButton('关于我们')
+    btn1 = MButton('过往活动')
+    btn2 = MButton('活动')
+    btn3 = MButton('我们')
     m_list = [btn1, btn2, btn3]
     
-    btn1.add_button(MButton('即将进行', key='GET_CURRENT_ACTIVITY'))
-    btn1.add_button(MButton('活动历史', key='GET_ACTIVITY_HISTORY'))
-    btn1.add_button(MButton('活动报名', key='SIGN_FOR_ACTIVITY'))
+    btn1.add_button(MButton('智能硬件', key='VIEW_SMART_HARDWARE'))
+    btn1.add_button(MButton('移动互联', key='VIEW_MOBILE_COMMUNICATION'))
+    btn1.add_button(MButton('技能互换', key='VIEW_SKILL_SWAP'))
+    btn1.add_button(MButton('户外', key='VIEW_OUTDOOR'))
     
-    btn2.add_button(MButton('发起活动', url='http://wwww.baidu.com'))
-    btn2.add_button(MButton('为活动投票',key='VOTE_FOR_ACTIVITY'))
+    btn2.add_button(MButton('近期活动', url='http://weixin2py.gg-workshop.com/recent/'))
+    btn2.add_button(MButton('技能互换', url='http://weixin2py.gg-workshop.com/recent/'))
+    btn2.add_button(MButton('我来组织',key='CREATE_ACTIVITY'))
     
-    btn3.add_button(MButton('突围俱乐部', key='ABOUT_TUWEI'))
-    btn3.add_button(MButton('组织者们', key='ABOUT_AUTHORS'))
-    btn3.add_button(MButton('核心价值观', key='CORE_VALUES'))
-    btn3.add_button(MButton('联系我们', key='CONTACT_US'))
+    btn3.add_button(MButton('微信功能', key='ABOUT_WEIXIN'))
+    btn3.add_button(MButton('了解突围', key='ABOUT_TUWEI'))
+    btn3.add_button(MButton('成员介绍', key='ABOUT_MEMBERS'))
+    btn3.add_button(MButton('加入我们', key='JOIN_US'))
 
     return m_list
 
-
+def post_menu(appid, appsecret):
+    mlist = create_btns
+    token = get_token(appid, appsecret)
+    create_menu(token, mlist)
+    
     
     
     

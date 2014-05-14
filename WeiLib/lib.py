@@ -261,7 +261,7 @@ def create_menu(access_token, menu_list):
     data = render_to_string('send/menu_create.json', {'menu_list': menu_list})
     
     endata = data.encode('utf-8')
-    open('tmp.json','w').write(endata)
+    #open('tmp.json','w').write(endata)
     try:
         result = ""
         result = urllib2.urlopen(url, endata, 20).read()
