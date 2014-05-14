@@ -1,4 +1,5 @@
 .settings
+*.db
 localsettings.py
 *.py[cod]
 *.pyc
