@@ -263,7 +263,7 @@ def create_menu(access_token, menu_list):
     endata = data.encode('utf-8')
     #open('tmp.json','w').write(endata)
     try:
-        result = ""
+        resuhlt = ""
         result = urllib2.urlopen(url, endata, 20).read()
     except:
         return False

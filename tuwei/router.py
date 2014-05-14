@@ -15,8 +15,8 @@ from tuwei.handlers import (help_handler,about_handler,
 """
 router_patterns =[
          # 消息类型  消息文字（非文字类型消息留空）  操作函数
-         ('text', re.compile('^help$'), help_handler),
-         ('text', re.compile('^about$'), about_handler),
-         ('text', re.compile('^test$'), test_handler),
+         #('text', re.compile('^help$'), help_handler),
+         #('text', re.compile('^about$'), about_handler),
+         #('text', re.compile('^test$'), test_handler),
          ]
 
