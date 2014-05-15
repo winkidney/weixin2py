@@ -4,11 +4,14 @@
 #include router function and router pattern response
 #ver 0.1 by winkidney 2014.05.10
 
-import re
+import re,os,logging
 from WeiLib.handlers import default_handler
 from WeiLib.models import (DBTextMsg,PatternT2T,DBImgTextMsg,PatternT2PT,
                            PatternE2PT,PatternE2T)
 from WeiLib.lib import text_response,pic_text_response,PicTextMsg,PTItem
+#import plugins that handler db_file
+
+            
 
 def base_router(recv_msg, router_patterns):
     for type,key,handler in router_patterns:
@@ -34,10 +37,12 @@ def db_router(recv_msg, *args):
             match = re.search(pattern.content.encode('utf-8'), recv_msg.content)
             if match:
                 return text_response(recv_msg, pattern.handler.content)
+            
         for pattern in PatternT2PT.objects.all():
             match = re.search(pattern.content.encode('utf-8'), recv_msg.content)
             if match:
                 return pic_text_response(recv_msg, db_msg_get(pattern))
+            
     if recv_msg.msg_type == 'event':
         for pattern in PatternE2T.objects.all():
             

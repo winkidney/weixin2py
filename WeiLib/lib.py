@@ -2,10 +2,14 @@
 # WeiLib/lib.py - contains libs of weichat message 
 # and some tool function.
 #read xml text and return a xml object
-import datetime
+import datetime,os
 import re,hashlib,urllib2,urllib
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
+from django.template import Context, Template
+
+from WeiLib.plugin.setting import plugin_on as PLUGINS
+
 
 #basic info
 re_msg_type = re.compile(r"<MsgType><!\[CDATA\[(.*?)\]\]></MsgType>")
@@ -274,11 +278,18 @@ def create_menu(access_token, menu_list):
         return False
         
     
-
+def render_from_string(string, data):
+   t = Template(string)
+   return t.render(Context(data))
 
 def text_response(recv_msg, content):
     msg = TextMsg(recv_msg.to_user_name, recv_msg.from_user_name, recv_msg.create_time)
-    msg.make_msg(content)
+    plugin_dict = {}
+    for plugin in PLUGINS:
+        result = plugin.processor(recv_msg)
+        if isinstance(result, dict):
+            plugin_dict.update(result)
+    msg.make_msg(render_from_string(content, plugin_dict))
     return render_to_response('response/msg_text.xml', 
                                       {'msg' : msg,}
                                      )
@@ -303,7 +314,7 @@ def pic_text_response(recv_msg, msg_item):
     return render_to_response('response/msg_pic_text.xml', 
                                       {'msg' : msg,}
                                      ) 
-######### router - handlers ########    
+   
  
     
  

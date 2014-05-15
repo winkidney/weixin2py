@@ -31,7 +31,7 @@ class DBTextMsg(models.Model):
     content = models.TextField(blank=False,verbose_name="内容")
     
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.id, self.name)
 
 class DBImgTextMsg(models.Model):
     
@@ -47,14 +47,14 @@ class DBImgTextMsg(models.Model):
     url = models.URLField(blank=False, max_length=255, verbose_name="文章地址")
     
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.id, self.name)
 
 class PatternE2T(models.Model):
     
     """text response pattern to user"""
     class Meta:
-        verbose_name = 'z事件>文本消息回复规则'
-        verbose_name_plural = 'z事件>文本消息回复规则'
+        verbose_name = 'M事件>文本消息回复规则'
+        verbose_name_plural = 'M事件>文本消息回复规则'
     name = models.CharField(blank=True,max_length=50,verbose_name="规则命名",
                             help_text="可以为空，仅用来标识规则")
     type = models.CharField(max_length=20,
@@ -70,7 +70,7 @@ class PatternE2T(models.Model):
     handler = models.ForeignKey(DBTextMsg, verbose_name="回复消息")
     
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.id, self.name)
     
 class PatternE2PT(models.Model):
     
@@ -93,7 +93,7 @@ class PatternE2PT(models.Model):
     handler = models.ManyToManyField(DBImgTextMsg, verbose_name="回复消息", help_text="最多允许五条，不然会出错")
     
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.id, self.name)
 
 class PatternT2PT(models.Model):
     
@@ -112,7 +112,7 @@ class PatternT2PT(models.Model):
     handler = models.ManyToManyField(DBImgTextMsg, verbose_name="回复消息", help_text="最多允许五条，不然会出错")
     
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.id, self.name)
     
 class PatternT2T(models.Model):
     
@@ -131,7 +131,7 @@ class PatternT2T(models.Model):
     handler = models.ForeignKey(DBTextMsg, verbose_name="响应的消息内容")
 
     def __unicode__(self):
-        return self.name
+        return u'%s %s' % (self.id, self.name)
 
 
 

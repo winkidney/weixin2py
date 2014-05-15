@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    if os.path.isfile("gamegear/localsettings.py"):
+    if os.path.isfile("weixin2py/localsettings.py"):
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weixin2py.localsettings")
         #print 'localsettings'
     else:
