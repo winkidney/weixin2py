@@ -19,9 +19,12 @@ my_router = [
 ```
 程序会匹配关键字并使用handler返回相应。    
 
+* 插件机制，插件存放在WeiLib/plugin/,可以在回复的文本消息中使用django模板系统，更加灵活，插件开发标准请参考"activity.py"插件，启用的插件列表在/WeiLib/plugin/setting.py
+
 目前新版本开发中，不保证任何可用性，需要老版（代码很丑陋）请移步：[这里](https://github.com/winkidney/weixin2py/tree/release1.0) 
 
 ### 3.Change Log
+* 2014.05.09 - 2014.05.15 增加路由功能，插件功能。
 * 2014.05.08 - 全面重构中
 * 2013.xx.xx - first release,多么幼稚的代码
 
