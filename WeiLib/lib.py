@@ -7,9 +7,15 @@ import re,hashlib,urllib2,urllib
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 from django.template import Context, Template
+from django.core.cache import cache
+try:
+    import cPickle as pickle
+except:
+    import pickle
 
 from WeiLib.plugin.setting import plugin_on as PLUGINS
 
+DEFAULT_TIMEOUT = 15*60
 
 #basic info
 re_msg_type = re.compile(r"<MsgType><!\[CDATA\[(.*?)\]\]></MsgType>")
@@ -105,27 +111,29 @@ class GetMsg(object):
 
 class WeiSession(object):
     '''微信助手会话类，用来存储用户的会话状态'''
-    def __init__(self):
-        self.get_status()
-        self.status = u''
-    
-    def get_status(self,):
-        pass
+    def __init__(self, openid):
+        self.openid = openid
+        self.get_session()
+
+    def get_session(self):
+        session = cache.get(self.openid)
+        if not session:
+            self.session = {}
+        else:
+            self.session = pickle.loads(session)
     
     def save(self):
-        pass
+        session_storage =  pickle.dumps(self.session)
+        cache.set(self.openid, session_storage, DEFAULT_TIMEOUT)
     
-    def update(self):
-        pass
+    def set_key(self, key , value):
+        self.session[key] = value
+        self.save()
     
-    def menu_out(self,):
-        self.status = self.status[0:-2]
+    def get_key(self, key):
+        return self.session.get(key)
     
-    def menu_in(self,menu_obj):
-        self.status = self.status+menu_obj
-    
-    def exit(self):
-        self.status =''
+
         
 # Message for response to user
 class ResMsg(object):
