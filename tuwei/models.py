@@ -29,6 +29,16 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile.save()
 #拓展结束
 
+def create_weiuser(openid, password):
+    user = User()
+    user.set_password(password)
+    user.username = 'UnNamedUser'
+    user.save()
+    
+    profile = WeixinUser()
+    profile.auth_user = user
+    profile.openid = openid
+    profile.save()
     
 
 
