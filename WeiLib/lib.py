@@ -13,7 +13,7 @@ try:
 except:
     import pickle
 
-from WeiLib.plugin.setting import plugin_on as PLUGINS
+from WeiLib.plugin.setting import plugin_text as PLUGINS
 
 DEFAULT_TIMEOUT = 15*60
 
