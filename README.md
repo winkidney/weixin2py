@@ -152,8 +152,9 @@ router_patterns =[
 将你的handler导入。然后如注释一样添加模式。    
 
 #####在view中使用handler和router
-示例文件：tuwei/views.py - 仅展现关键逻辑，详情参考具体文件
-'''python
+示例文件：tuwei/views.py - 仅展现关键逻辑，详情参考具体文件    
+
+```python
 from WeiLib.router import base_router,db_router
 from tuwei.router import router_patterns
 from WeiLib.handlers import default_handler
