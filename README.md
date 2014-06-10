@@ -29,6 +29,7 @@ yum系系统类似方法安装依赖即可～～
 ```bash
 python rebuild.py
 ```
+然后在你的settings.py中编辑TOKEN，改为你自己的TOKEN    
 将会自动生成数据库并添加超级用户，用户名admin,密码admin，你可以自行去这个脚本修改默认设定，数据库为了方便起见使用了sqlite    
 ```bash
 sh runserver.sh
@@ -63,11 +64,140 @@ sh runserver.sh
 ###APIS
 
 ####[插件](id:插件编写)
-####handler
-####Session
+插件目前仅工作在文本回复阶段，在匹配到消息回复之后，会对回复消息进行以此渲染，渲染所用的信息字典就是插件返回的字典。
+每一个插件所返回的字典内容都会被自动合并到一个字典，然后在你的消息回复定义中使用你所返回的字典中的变量即可（当然可以是动态）
+#####目录结构
+插件目录位于WeiLib/plugins/    
+目录结构如下
+```bash
+WeiLib/plugins/    
+    |- setting.py - 插件配置文件    
+    |- activity.py - 插件实现 （名字可以任意）    
+```
+#####编写
+1.在插件目录下新建一个任意名字的py文件，然后根据如下格式写一个名为processor函数，这个函数会接收用户的消息对象作为参数，你可以根据用户的消息动态定义消息回复。
+```python
+#!/usr/bin/env python
+#coding:utf-8
+#WeiLib/plugin/acitvity.py - activity plugin for WeiLib
 
+def processor(recv_msg):
+    """A processor must return a dict.
+       If not ,program will throw the returned result.
+    """
+    return {'test_plugin': 'only_the test plugin output'}
+```              
+2.启用插件
+打开setting.py，将你的插件导入并编辑plugin_text元组。
+```python
+import activity
+plugin_text = ( activity,
+             )
+```
+3.在消息回复中使用插件定义的内容
+![使用包含插件功能的文本2文本消息回复规则](res/plugin_test.jpg)
+
+####handler
+handler是拓展这个应用功能的另一种方式，最初开发使用的是这种方式，在没有数据库的情况下也可以正常运作，缺点是数据一旦写死修改很麻烦，适合用来生成动态内容，例如聊天机器人接口，查询接口之类的.
+#####结构
+目前应用内置了两个router，file_router和db_router，执行的优先级是file_router->db_router，handler是file_router才有的结构。    
+#####编写一个handler
+在任意应用目录新建一个handlers.py（只是约定，可以自定义名称），将handler书写到其中。一个典型的handler如下。    
+```python
+#!/usr/bin/env python
+#coding:utf-8
+#WeiLib/handlers.py - router handlers for WeiLib
+#ver 0.1 by winkidney 2014.05.10
+
+from WeiLib.lib import text_response
+
+def default_handler(recv_msg):
+    #do something
+    return text_response(recv_msg, "没有匹配操作，返回默认信息")
+   
+```
+handler 返回一个text_response或者一个pic_text_response(图文消息回复)，也可以是你自定义的response，要求必须是一个django的HttpResponse实例。    
+#####启用handler
+为了启用handler，你需要增加一个匹配模式，打开应用目录下的tuwei/router.py文件,示例内容如下
+```python
+#!/usr/bin/env python
+#coding:utf-8
+#tuwei/router.py - message router to generate response message
+#ver 0.1 by winkidney 2014.05.10
+
+import re
+
+from tuwei.handlers import (help_handler,about_handler,
+                            test_handler)
+
+
+"""
+参考信息：
+消息类型：text ,event,image, video, link , location,
+"""
+router_patterns =[
+         # 消息类型  消息文字（非文字类型消息留空）  操作函数
+         #('text', re.compile('^help$'), help_handler),
+         #('text', re.compile('^about$'), about_handler),
+         #('text', re.compile('^test$'), test_handler),
+         ]
+```
+将你的handler导入。然后如注释一样添加模式。    
+
+#####在view中使用handler和router
+示例文件：tuwei/views.py - 仅展现关键逻辑，详情参考具体文件
+'''python
+from WeiLib.router import base_router,db_router
+from tuwei.router import router_patterns
+from WeiLib.handlers import default_handler
+
+try:
+    from weixin2py.localsettings import TOKEN
+except:
+    from weixin2py.settings import TOKEN
+#router 必须是一个list实例
+routers = [base_router, db_router]
+
+       
+@csrf_exempt  
+def home(request):
+    if request.method == 'GET':
+        myresponse = HttpResponse()
+        if check_signature(request, TOKEN):
+            myresponse.write(request.GET.get('echostr'))
+            return myresponse
+        else:
+            myresponse.write('不提供直接访问！')
+            return myresponse
+        
+    if request.method == 'POST':
+        #check_signature(request, TOKEN)
+        recv_msg = GetMsg(request.body)
+        for router in routers:
+            result = router(recv_msg, router_patterns)    #使用预定义的router和pattern
+            if isinstance(result, HttpResponse):
+                return result
+        return default_handler(recv_msg)  #在view中直接使用handler
+```
+
+####Session
+```python
+class WeiSession(object):
+    '''微信助手会话类，用来存储用户的会话状态'''
+    def __init__(self, openid): #使用openid获得session，如果已存在则获得现有session，如果没有则生成的新session,缓存键的名称是openid
+    
+    def set_key(self, key , value): #设定一个键值，类似python字典操作，将会自动保存到会话当中
+    
+    def get_key(self, key): #取得key，如果不存在则返回空
+```
+具体的使用请自由发挥
+####其他接口/工具类
+WeiLib/lib.py - class:GetMsg - 从用户发送的消息从获得一个消息实例，自动识别类型并生成相应属性    
+WeiLib/lib.py - function:check_signature(request, TOKEN) - 从一个request对象和指定token中验证消息是否合法，合法返回True，不合法返回False    
+WeiLib/lib.py - function:get_token(appid, secretkey) - 返回一个access_token，用于腾讯的其他接口的必要验证    
 
 ### 4.Change Log
+* 2014-06-10 - 修复小bug，更新文档。    
 * 2014.05.09 - 2014.05.15 增加路由功能，插件功能。
 * 2014.05.08 - 全面重构中
 * 2013.xx.xx - first release,多么幼稚的代码
