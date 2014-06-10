@@ -1,12 +1,12 @@
 #weixin2py--微信公众平台web服务器
 
-### 1.Summary
+###Summary
 
 * 使用python2.7和django 1.5.1开发的微信公众平台服务端程序，可以自动回复用户发来微信的消息。
 * 最初的启发来自“武大助手”，类似的平台，提供消息智能回复功能。
 * 完全重构了代码，虽然还有很多缺陷但已经完美了很多：）欢迎提出pull request。
 
-### 2. Feature
+###Feature
 * 可拔插设计，提供django app ‘WeiLib’，里面有大部分可能用到的工具类和工具函数，需要的时候，新建你的django app，并且在app中使用WeiLib。
 * 消息模版,WeiLil.llib中包含了text_response和pic_text_response函数，传入参数可以在任意view或者handler中使用.
 * 缓存session功能，为增加诸如“谁是卧底”类的应用提供基础，更改你的缓存后端或者更改缓存接口即可.
@@ -17,7 +17,7 @@
 
 需要老版（代码很丑陋）请移步：[这里](https://github.com/winkidney/weixin2py/tree/release1.0) 
 
-### 3.How To
+###How To
 ####INSTALL
 依赖于django1.5和python2.7，请先安装对应版本的django和python，不支持3.x。你可以使用如下方式安装python依赖：
 ```bash
@@ -53,7 +53,7 @@ sh runserver.sh
 ![使用包含插件功能的文本2文本消息回复规则](res/plugin_test.jpg)
 
 插件消息使用django模板语法进行编写，参见[django模板语法](http://django-14-tkliuxing.readthedocs.org/en/latest/topics/templates.html)    
-插件编写参见[插件编写](插件编写)
+插件编写参见[插件编写](#插件编写)
 
 ###流程说明
 ![工作流程图](res/flow.jpg)
