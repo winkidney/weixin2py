@@ -10,7 +10,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from WeiLib.lib import create_menu,MButton,get_token
-from django.template.loader import render_to_string
+
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):

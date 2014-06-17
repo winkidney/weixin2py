@@ -211,10 +211,8 @@ WeiLib/lib.py - function:get_token(appid, secretkey) - 返回一个access_token�
 * 2013.xx.xx - first release,多么幼稚的代码
 
 ### 5.To Do List
-1. 简化程序，并将通用处理过程提取出来，让处理函数可以直接方便的处理消息(done)
-2. 将用户session改到key-value数据库存储或者内存缓存，提高效率和可靠性。(todo)
-3. 修改数据库设定，让数据库具有通用性并允许拓展。(done)
-4. 设计一套管理ui(todo)
+1. 设计一套管理ui(todo)
+2. 写一个谁是卧底的插件
 
 
  [博客](http://blog.gg-workshop.com/) 
