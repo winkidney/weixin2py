@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #coding:utf-8
-#WeiLib/plugin/acitvity.py - activity plugin for WeiLib
+#weilib/plugin/acitvity.py - activity plugin for weilib
 #ver 0.1 by winkidney 2014.05.10
+
 
 def processor(recv_msg):
     """A processor must return a dict.

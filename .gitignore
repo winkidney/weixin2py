@@ -1,8 +1,14 @@
+# dirs and specified files
+env
+.idea
 .settings
 *.db
 localsettings.py
+
+# Python Lib files
 *.py[cod]
 *.pyc
+
 # C extensions
 *.so
 

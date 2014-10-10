@@ -3,11 +3,11 @@ import os
 import sys
 
 if __name__ == "__main__":
-    if os.path.isfile("weixin2py/localsettings.py"):
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weixin2py.localsettings")
+    if os.path.isfile("wei_demo/localsettings.py"):
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wei_demo.localsettings")
         #print 'localsettings'
     else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weixin2py.settings")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wei_demo.settings")
 
     from django.core.management import execute_from_command_line
 

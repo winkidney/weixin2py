@@ -1,4 +1,4 @@
-#weixin2py--微信公众平台web服务器
+#weixin2py--微信公众平台web服务器-0.1.1
 
 ###Summary
 
@@ -7,15 +7,15 @@
 * 完全重构了代码，虽然还有很多缺陷但已经完美了很多：）欢迎提出pull request。
 
 ###Feature
-* 可拔插设计，提供django app ‘WeiLib’，里面有大部分可能用到的工具类和工具函数，需要的时候，新建你的django app，并且在app中使用WeiLib。
-* 消息模版,WeiLil.llib中包含了text_response和pic_text_response函数，传入参数可以在任意view或者handler中使用.
-* 缓存session功能，为增加诸如“谁是卧底”类的应用提供基础，更改你的缓存后端或者更改缓存接口即可.
-* 路由功能((数据库路由和文件路由)，使用正则表达式对回复进行匹配。
-* 支持可视化的自定义消息回复规则和程序性的消息回复规则，使用接口编写即可，通过简单的过程，你也可以集成你的聊天机器人：）
+* 可拔插设计 - 提供django app ‘WeiLib’，里面有大部分可能用到的工具类和工具函数，需要的时候，新建你的django app，并且在app中使用WeiLib。
+* 消息模版 - WeiLil.lib中包含了text_response和pic_text_response函数，传入参数可以在任意view或者handler中使用.
+* 缓存session功能 - 为增加诸如“谁是卧底”类的应用提供基础，更改你的缓存后端或者更改缓存接口即可.
+* 路由功能((数据库路由和文件路由) - 使用正则表达式对回复进行匹配。
+* 支持可视化的自定义消息回复规则和程序性的消息回复规则 - 使用接口编写即可，通过简单的过程，你也可以集成你的聊天机器人：）
 * 插件支持，你可以用django模板语法定义动态消息回复
 * 当用户发来第一条消息的时候，自动检测用户是否存在并生成一个唯一的用户（使用openid），存储到数据库。(未实现)
 
-需要老版（代码很丑陋）请移步：[这里](https://github.com/winkidney/weixin2py/tree/release1.0) 
+
 
 ###How To
 ####INSTALL
@@ -24,39 +24,47 @@
 apt-get install python-pip
 pip install django>=1.5
 ```
-yum系系统类似方法安装依赖即可～～    
+yum系系统类似方法安装依赖即可～～
+或
+```bash
+cd weixin2py
+python setup.py install
+```
+    
 接下来,打开你的bash，切换到应用根目录,执行
 ```bash
-python rebuild.py
+python rebuild_db.py
 ```
 然后在你的settings.py中编辑TOKEN，改为你自己的TOKEN    
 将会自动生成数据库并添加超级用户，用户名admin,密码admin，你可以自行去这个脚本修改默认设定，数据库为了方便起见使用了sqlite    
 ```bash
 sh runserver.sh
 ```
-运行测试服务器（默认工作在80端口）。    
+运行测试服务器（默认工作在80端口）。   
+配置完毕后,登陆你的微信公众平台,设定访问地址为:http://yourhost:port/    
+微信公众平台的接口URL为http://yourhost:port/weichat/
 也可以使用nginx+*cgi,任何你喜欢的方式。提供了脚本ctrl8020.sh来控制fcig模式的启动和关闭。    
 
 ####Basic Usage
-访问http://youhost/admin/    
+访问http://youhost:port/admin/    
 登录，添加消息回复规则即可。    
 例如 想对用户发来的文本消息进行匹配，并回复一条文本消息，在管理面板中选择“文本>文本消息回复规则”，根据各个字段的提示进行填写即可。
 如下示例图    
 用户发来的消息类型 2 回复的消息类型    
 #####示例：文本2文本 消息回复规则    
 
-![添加文本->文本消息回复规则](res/home.jpg)
-![添加文本->文本消息回复规则2](res/text2text_1.jpg)
+![添加文本->文本消息回复规则](weixin2py/res/home.jpg)
+![添加文本->文本消息回复规则2](weixin2py/res/text2text_1.jpg)
 
 #####示例：添加使用插件的   文本2文本  消息回复规则
 
-![使用包含插件功能的文本2文本消息回复规则](res/plugin_test.jpg)
+![使用包含插件功能的文本2文本消息回复规则](weixin2py/res/plugin_test.jpg)
 
 插件消息使用django模板语法进行编写，参见[django模板语法](http://django-14-tkliuxing.readthedocs.org/en/latest/topics/templates.html)    
 插件编写参见[插件编写](#插件编写)
 
 ###流程说明
-![工作流程图](res/flow.jpg)
+![工作流程图](weixin2py/res/flow.jpg)
 
 
 
@@ -80,13 +88,16 @@ WeiLib/plugins/
 ```python
 #!/usr/bin/env python
 #coding:utf-8
-#WeiLib/plugin/acitvity.py - activity plugin for WeiLib
+#weilib/plugin/acitvity.py - activity plugin for weilib
 
 def processor(recv_msg):
     """A processor must return a dict.
        If not ,program will throw the returned result.
     """
-    return {'test_plugin': 'only_the test plugin output'}
+    from_user = recv_msg.from_user
+    return {'test_plugin': 'only_the test plugin output',
+            'from_user': from_user
+            }
 ```              
 2.启用插件
 打开setting.py，将你的插件导入并编辑plugin_text元组。
@@ -98,7 +109,7 @@ plugin_text = ( activity,
 ```
 
 3.在消息回复中使用插件定义的内容
-![使用包含插件功能的文本2文本消息回复规则](res/plugin_test.jpg)
+![使用包含插件功能的文本2文本消息回复规则](weixin2py/res/plugin_test.jpg)
 
 ####handler
 handler是拓展这个应用功能的另一种方式，最初开发使用的是这种方式，在没有数据库的情况下也可以正常运作，缺点是数据一旦写死修改很麻烦，适合用来生成动态内容，例如聊天机器人接口，查询接口之类的.
@@ -110,8 +121,8 @@ handler是拓展这个应用功能的另一种方式，最初开发使用的是�
 ```python
 #!/usr/bin/env python
 #coding:utf-8
-#WeiLib/handlers.py - router handlers for WeiLib
-#ver 0.1 by winkidney 2014.05.10
+#weilib/handlers.py - router handlers for weilib
+
 
 from WeiLib.lib import text_response
 
@@ -129,7 +140,6 @@ handler 返回一个text_response或者一个pic_text_response(图文消息回�
 #!/usr/bin/env python
 #coding:utf-8
 #tuwei/router.py - message router to generate response message
-#ver 0.1 by winkidney 2014.05.10
 
 import re
 
@@ -143,7 +153,7 @@ from tuwei.handlers import (help_handler,about_handler,
 """
 router_patterns =[
          # 消息类型  消息文字（非文字类型消息留空）  操作函数
-         #('text', re.compile('^help$'), help_handler),
+         ('text', re.compile('^help$'), help_handler),
          #('text', re.compile('^about$'), about_handler),
          #('text', re.compile('^test$'), test_handler),
          ]
@@ -155,38 +165,44 @@ router_patterns =[
 示例文件：tuwei/views.py - 仅展现关键逻辑，详情参考具体文件    
 
 ```python
-from WeiLib.router import base_router,db_router
-from tuwei.router import router_patterns
-from WeiLib.handlers import default_handler
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from weilib.router import base_router, db_router
+from .router import router_patterns
+from weilib.lib import GetMsg, check_signature
+from weilib.handlers import default_handler
+
 try:
-    from weixin2py.localsettings import TOKEN
-except:
-    from weixin2py.settings import TOKEN
-#router 必须是一个list实例
+    from wei_demo.localsettings import TOKEN
+except ImportError:
+    from wei_demo.settings import TOKEN
+# router 必须是一个list实例
 routers = [base_router, db_router]
-       
-@csrf_exempt  
+
+@csrf_exempt
 def home(request):
     if request.method == 'GET':
-        myresponse = HttpResponse()
+        response = HttpResponse()
         if check_signature(request, TOKEN):
-            myresponse.write(request.GET.get('echostr'))
-            return myresponse
+            response.write(request.GET.get('echostr'))
+            return response
         else:
-            myresponse.write('不提供直接访问！')
-            return myresponse
-        
+            response.write('不提供直接访问！')
+            return response
+
     if request.method == 'POST':
         #check_signature(request, TOKEN)
         recv_msg = GetMsg(request.body)
         for router in routers:
-            result = router(recv_msg, router_patterns)    #使用预定义的router和pattern
+            result = router(recv_msg, router_patterns)  # 使用预定义的路由模式
             if isinstance(result, HttpResponse):
                 return result
-        return default_handler(recv_msg)  #在view中直接使用handler
+        return default_handler(recv_msg)  # 如果没有匹配，则返回默认信息
 ```
 
 ####Session
+使用CPickle和缓存接口实现的一个Session类
 ```python
 class WeiSession(object):
     '''微信助手会话类，用来存储用户的会话状态'''
@@ -201,19 +217,19 @@ class WeiSession(object):
 
 ####其他接口/工具类
 WeiLib/lib.py - class:GetMsg - 从用户发送的消息从获得一个消息实例，自动识别类型并生成相应属性    
-WeiLib/lib.py - function:check_signature(request, TOKEN) - 从一个request对象和指定token中验证消息是否合法，合法返回True，不合法返回False    
+WeiLib/lib.py - function:check_signature(request, token) - 从一个request对象和指定token中验证消息是否合法，合法返回True，不合法返回False    
 WeiLib/lib.py - function:get_token(appid, secretkey) - 返回一个access_token，用于腾讯的其他接口的必要验证    
 
 ### 4.Change Log
+* 2014-10-10 - 修改版本号为０．１．１，增加setup.py，修改代码结构和说明文档，修改管理界面项目名称
 * 2014-06-10 - 修复小bug，更新文档。    
 * 2014.05.09 - 2014.05.15 增加路由功能，插件功能。
 * 2014.05.08 - 全面重构中
 * 2013.xx.xx - first release,多么幼稚的代码
 
 ### 5.To Do List
-1. 设计一套管理ui(todo)
-2. 写一个谁是卧底的插件
-
+1. 写一个谁是卧底的插件（因为懒散暂时搁置）
+2. 更改插件工作流（仔细考虑必要性当中）
 
  [博客](http://blog.gg-workshop.com/) 
 
