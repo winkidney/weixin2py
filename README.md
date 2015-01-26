@@ -238,3 +238,7 @@ WeiLib/lib.py - function:get_token(appid, secretkey) - 返回一个access_token�
 by winkidney 2014-05-15
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/winkidney/weixin2py/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
