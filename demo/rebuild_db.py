@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding:utf-8
-# rootdir/rebuild_db.py - rebuild db automatically.
-# winkidney 2014 - ver 0.1
+
 import sys
 import os
 from django.core import management
@@ -28,7 +27,7 @@ def syncdb_with_su(su_name, su_email, su_passwd):
     print "sync done"
     # create super user
     user = User.objects.create_superuser(su_name, su_email, su_passwd)
-    #user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+    # user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
     user.save()
     print "super user added"
 

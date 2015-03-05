@@ -53,18 +53,18 @@ sh runserver.sh
 用户发来的消息类型 2 回复的消息类型    
 #####示例：文本2文本 消息回复规则    
 
-![添加文本->文本消息回复规则](weixin2py/res/home.jpg)
-![添加文本->文本消息回复规则2](weixin2py/res/text2text_1.jpg)
+![添加文本->文本消息回复规则](res/home.jpg)
+![添加文本->文本消息回复规则2](res/text2text_1.jpg)
 
 #####示例：添加使用插件的   文本2文本  消息回复规则
 
-![使用包含插件功能的文本2文本消息回复规则](weixin2py/res/plugin_test.jpg)
+![使用包含插件功能的文本2文本消息回复规则](res/plugin_test.jpg)
 
 插件消息使用django模板语法进行编写，参见[django模板语法](http://django-14-tkliuxing.readthedocs.org/en/latest/topics/templates.html)    
 插件编写参见[插件编写](#插件编写)
 
 ###流程说明
-![工作流程图](weixin2py/res/flow.jpg)
+![工作流程图](res/flow.jpg)
 
 
 
@@ -109,7 +109,7 @@ plugin_text = ( activity,
 ```
 
 3.在消息回复中使用插件定义的内容
-![使用包含插件功能的文本2文本消息回复规则](weixin2py/res/plugin_test.jpg)
+![使用包含插件功能的文本2文本消息回复规则](res/plugin_test.jpg)
 
 ####handler
 handler是拓展这个应用功能的另一种方式，最初开发使用的是这种方式，在没有数据库的情况下也可以正常运作，缺点是数据一旦写死修改很麻烦，适合用来生成动态内容，例如聊天机器人接口，查询接口之类的.

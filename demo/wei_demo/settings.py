@@ -3,6 +3,7 @@
 
 import os
 from django.test.simple import DjangoTestSuiteRunner
+from weixin2py import weixin2py_template_dir
 
 PROJECT_ROOT = os.path.join(
     os.path.realpath(os.path.dirname(__file__)), os.pardir).replace('\\', '/')
@@ -103,7 +104,7 @@ STATICFILES_FINDERS = (
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    #'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,11 +119,13 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'wei_demo.urls'
 
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'wei_demo.wsgi.application'
 
+
 TEMPLATE_DIRS = (
-    PROJECT_ROOT + '/weilib/templates/',
+    weixin2py_template_dir,
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -135,7 +138,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'weilib',
+    'weixin2py',
     'sample',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

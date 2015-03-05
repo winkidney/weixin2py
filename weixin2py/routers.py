@@ -1,17 +1,8 @@
-#!/usr/bin/env python
 # coding:utf-8
-# weilib/router.py - router handlers for weilib
-# include router function and router pattern response
-# ver 0.1 by winkidney 2014.05.10
 
 import re
-import os
-import logging
-from weilib.handlers import default_handler
-from weilib.models import (DBTextMsg, PatternT2T, DBImgTextMsg, PatternT2PT,
-                           PatternE2PT, PatternE2T)
-from weilib.lib import text_response, pic_text_response, PicTextMsg, PTItem
-
+from .models import (PatternT2T, PatternT2PT, PatternE2PT, PatternE2T)
+from .utils import text_response, pic_text_response, PTItem
 
 
 def base_router(recv_msg, router_patterns):
