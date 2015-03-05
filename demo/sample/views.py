@@ -2,15 +2,15 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from weilib.router import base_router, db_router
+from weixin2py.routers import base_router, db_router
 from .router import router_patterns
-from weilib.lib import GetMsg, check_signature
-from weilib.handlers import default_handler
+from weixin2py import WeiMsg, check_signature
+from weixin2py.handlers import default_handler
 
 try:
     from wei_demo.localsettings import TOKEN
 except ImportError:
-    from ..wei_demo.settings import TOKEN
+    from wei_demo.settings import TOKEN
 
 # router must be a list of router instance
 routers = [base_router, db_router]
@@ -30,7 +30,7 @@ def home(request):
     if request.method == 'POST':
         # warning: test demo wil not check signature.
         # check_signature(request, TOKEN)
-        recv_msg = GetMsg(request.body)
+        recv_msg = WeiMsg(request.body)
         for router in routers:
             result = router(recv_msg, router_patterns)
             if isinstance(result, HttpResponse):

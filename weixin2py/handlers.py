@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-from .lib import text_response
+from .utils import text_response
 
 
 def default_handler(recv_msg):
