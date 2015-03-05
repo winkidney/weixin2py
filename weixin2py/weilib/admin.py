@@ -1,5 +1,4 @@
 # coding:utf-8
-# weilib/admin.py - basic models admin for weilib
 from django.contrib import admin
 from .models import (DBTextMsg, PatternT2T, DBImgTextMsg, PatternT2PT,
                      PatternE2PT, PatternE2T)

@@ -1,6 +1,4 @@
 # coding:utf-8
-# tuwei/models.py - database definition file
-# by kidney 2014.05.12
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -20,8 +18,6 @@ class WeixinUser(models.Model):
     def __unicode__(self):
         return u"%s %s" % (self.id, self.openid)
 
-# 拓展用户的一个函数，当不存在profile的时候则制造一个profile
-
 
 def create_user_profile(sender, instance, created, **kwargs):
     """Create the UserProfile when a new User is saved"""
@@ -29,7 +25,6 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile = WeixinUser()
         profile.user = instance
         profile.save()
-# 拓展结束
 
 
 def create_weiuser(openid, password):

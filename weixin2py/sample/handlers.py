@@ -9,8 +9,8 @@ from weilib.lib import text_response, pic_text_response
 def test_handler(recv_msg, *args, **kwargs):
     title = "测试图文消息"
     description = "图文消息描述"
-    pic_url = "http://blog.gg-workshop.com/static/upload/201405/665d5190-d9af-11e3-a9aa-04010628bc01.png"
-    url = "http://blog.gg-workshop.com"
+    pic_url = "//placeimg.com/160/100/any"
+    url = "http://www.baidu.com"
     items = []
     items.append(PTItem(title, description, pic_url, url))
     items.append(PTItem(title, description, pic_url, url))
@@ -27,11 +27,6 @@ def about_handler(recv_msg, *args, **kwargs):
 def subscrib_handler(recv_msg, *args, **kwargs):
     content = """
     --键入小写命令--
-    view   查看活动
-    input  发起活动
-    help   帮助信息
-    about  关于我们
-    使用相应功能^_^
     """
     return text_response(recv_msg, content)
 

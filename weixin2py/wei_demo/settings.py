@@ -2,6 +2,7 @@
 # localsettings.py - Django localsettings for weixin2py project.
 
 import os
+from django.test.simple import DjangoTestSuiteRunner
 
 PROJECT_ROOT = os.path.join(
     os.path.realpath(os.path.dirname(__file__)), os.pardir).replace('\\', '/')
@@ -135,7 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'weilib',
-    'tuwei',
+    'sample',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -181,3 +182,5 @@ CACHES = {
 }
 
 TOKEN = 'kidney'
+
+TEST_RUNNER = DjangoTestSuiteRunner

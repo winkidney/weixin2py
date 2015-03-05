@@ -1,5 +1,4 @@
 # coding:utf-8
-# tuwei/views.py
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -11,9 +10,9 @@ from weilib.handlers import default_handler
 try:
     from wei_demo.localsettings import TOKEN
 except ImportError:
-    from wei_demo.settings import TOKEN
+    from ..wei_demo.settings import TOKEN
 
-# router 必须是一个list实例
+# router must be a list of router instance
 routers = [base_router, db_router]
 
 
@@ -29,7 +28,8 @@ def home(request):
             return response
 
     if request.method == 'POST':
-        #check_signature(request, TOKEN)
+        # warning: test demo wil not check signature.
+        # check_signature(request, TOKEN)
         recv_msg = GetMsg(request.body)
         for router in routers:
             result = router(recv_msg, router_patterns)
