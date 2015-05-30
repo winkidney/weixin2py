@@ -1,24 +1,30 @@
-weixin2py--微信公众平台web服务器-0.1.2
+weixin2py--微信公众平台web服务器-0.1.3
 ---------------------------
 
 
 ##Summary
 
-* 使用python2.7和django 1.5.1(已适配为django 1.7.x)开发的微信公众平台服务端程序，可以自动回复用户发来微信的消息。
+* 使用python2.7和django(**Demo仅支持大于1.7版本的Django**)开发的微信公众平台服务端程序，可以自动回复用户发来微信的消息。
 * 最初的启发来自“武大助手”，类似的平台，提供消息智能回复功能。
 * 完全重构了代码，虽然还有很多缺陷但已经完美了很多：）欢迎提出pull request。
 
 ##Feature
 * 支持可视化的自定义消息回复规则和程序性的消息回复规则 - 使用接口编写即可，通过简单的过程，你也可以集成你的聊天机器人：）
-* 文本路由功能((数据库路由和文件路由) - 使用正则表达式对回复进行匹配。
+* 文本路由((数据库路由和文件路由) - 使用正则表达式对回复进行匹配。
 * 插件支持，你可以用django模板语法定义动态消息回复
 * 易于集成 - 单独对django app `weixin2py`，里面有大部分可能用到的工具类和工具函数，需要的时候，新建你的django app，并且在app中使用WeiLib。
 * 消息模版 - WeiLil.lib中包含了text_response和pic_text_response函数，传入参数可以在任意view或者handler中使用.
 * 缓存session - 为增加诸如“谁是卧底”类的应用提供基础，更改你的缓存后端或者更改缓存接口即可.
 
+
+##FAQ
+* 交流QQ群？ - （于是就信手建了一个）416407192
+* 调试和测试？ - [下载wei-dev二进制包](https://github.com/winkidney/wei-dev/releases)（图形化测试工具）
+
 ##Change Log
+* 2015-05-31 - 为Django1.8升级，修改setup.py中的Django版本要求
 * 2015-03-05 - 修改所有代码结构，分离weixin2py和demo应用，更新setup.py，现在可以单独安装weixin2py
-* 2014-10-10 - 修改版本号为０．１．１，增加setup.py，修改代码结构和说明文档，修改管理界面项目名称
+* 2014-10-10 - 修改版本号为0.0.1，增加setup.py，修改代码结构和说明文档，修改管理界面项目名称
 * 2014-06-10 - 修复小bug，更新文档。    
 * 2014.05.09 - 2014.05.15 增加路由功能，插件功能。
 * 2014.05.08 - 全面重构中
@@ -241,12 +247,10 @@ weixin2py - function:get_token(appid, secretkey) - 返回一个access_token，�
 
 ##To Do List
 1. 写一个谁是卧底的插件（因为懒散暂时搁置）
-2. 更改插件工作流（仔细考虑必要性当中）
+2. 更改插件工作流（因为未收集到任何意见暂时搁置）
 
- [博客](http://blog.gg-workshop.com/) 
+ [博客](http://blog.winkidney.com/)
 
  [My-github](http://github.com/winkidney)
-
-by winkidney 2015-03-05
 
 
