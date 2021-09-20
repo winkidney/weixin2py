@@ -82,7 +82,7 @@ class WeiMsg(object):
         self.event_key = self.get_info(re_eventkey, msg)
 
     def __init__(self, msg):
-        """genetate a message object
+        """generate a message object
         """
         self.to_user_name = self.get_info(re_msg_tuid, msg)
         self.from_user_name = self.get_info(re_msg_fuid, msg)

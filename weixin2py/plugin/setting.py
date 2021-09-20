@@ -4,7 +4,7 @@
 #ver 0.1 by winkidney 2014.05.10
 from . import activity
 
-#将在每个response返回之前运行，用于修改respose内容。
+#将在每个response返回之前运行，用于修改response内容。
 
 
 plugin_text = (activity,
